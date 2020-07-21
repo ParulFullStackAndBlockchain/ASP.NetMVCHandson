@@ -8,10 +8,18 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        //ASP.Net MVC will automatically pass any query string or form post parameters named "name"
+        //to index action methodwhen it is invoked.Eg: http://localhost/MVCDemo/Home/Index/10?name=cat
+        public string Index(string id,string name)
         {
-            return "Hello From MVC application";
+            return "The value of Id = " + id + " and Name = " + name;
         }
+
+        ////Input Eg: http://localhost/MVCDemo/Home/Index/10
+        //public string Index(string id)
+        //{
+        //    return "The value of Id = " + id;
+        //}
 
         public string GetDetails()
         {

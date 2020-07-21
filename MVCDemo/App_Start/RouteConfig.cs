@@ -11,11 +11,14 @@ namespace MVCDemo
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            //This is to handle requests for .axd files like trace.axd
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
                 name: "Default",
+                //Default route for MVC applications
                 url: "{controller}/{action}/{id}",
+                //Provides default controller and action values.Also id parameter is otpitonal
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }

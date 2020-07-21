@@ -14,6 +14,7 @@ namespace MVCDemo
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //mapping is defined via RegisterRoutes method defined in RouteConfig class
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
