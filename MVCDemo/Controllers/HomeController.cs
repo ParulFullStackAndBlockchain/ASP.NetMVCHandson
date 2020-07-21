@@ -8,36 +8,30 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
-        //ASP.Net MVC will automatically pass any query string or form post parameters named "name"
-        //to index action methodwhen it is invoked.Eg: http://localhost/MVCDemo/Home/Index/10?name=cat
-        public string Index(string id,string name)
+        //Why the return type is ActionResult and not ViewResult: A contoller action method can do more
+        // than just returning a view.It can return another action method or can return a json result.
+        public ActionResult Index()
         {
-            return "The value of Id = " + id + " and Name = " + name;
+            //Storing list of countries inside dynamic property Countries of ViewBag object.
+            ViewBag.Countries =new List<string> {
+                "India",
+                "US",
+                "UK",
+                "Canada"
+            };
+            return View();
         }
 
-        ////Input Eg: http://localhost/MVCDemo/Home/Index/10
-        //public string Index(string id)
+        //// O/P of below Action metod - System.Collections.Generic.List`1[System.String]
+        //public List<string> Index()
         //{
-        //    return "The value of Id = " + id;
+        //    return new List<string> {
+        //        "India",
+        //        "US",
+        //        "UK",
+        //        "Canada"
+        //    };
         //}
 
-        public string GetDetails()
-        {
-            return "GetDetails Invoked";
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
