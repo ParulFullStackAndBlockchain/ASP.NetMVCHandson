@@ -29,5 +29,7 @@ namespace MVCDemo.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MVCDemo.Models.Employee> Employees { get; set; }
     }
 }
