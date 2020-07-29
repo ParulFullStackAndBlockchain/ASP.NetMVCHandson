@@ -12,5 +12,7 @@ namespace MVCDemo.Models
         public DbSet<Employee> Employees { get; set; }
 
         public DbSet<Department> Departments { get; set; }
+
+        public System.Data.Entity.DbSet<BusinessLayer.EmployeeFromBusinessLayer> EmployeeFromBusinessLayers { get; set; }
     }
 }
