@@ -18,5 +18,11 @@ namespace MVCDemo.Controllers
             List<EmployeeFromBusinessLayer> employees = employeeBusinessLayer.EmployeesFromBusinessLayer.ToList();
             return View(employees);
         }
+
+        [HttpGet] //This makes this action method to respond only to the "GET" request
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }
