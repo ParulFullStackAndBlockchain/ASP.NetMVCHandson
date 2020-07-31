@@ -19,29 +19,36 @@ namespace MVCDemo.Controllers
             return View(employees);
         }
 
-        [HttpGet] //This makes this action method to respond only to the "GET" request
-        public ActionResult Create()
+        //"ActionName" is specified as "Create" for both of these methods. So, if a "GET" request is made to the "URL 
+        //- http://localhost/MVCDemo/Employee/Create" then "Create_Get()" controller action method is invoked. 
+        //On the other hand if a "POST" request is made to the same URL, then "Create_Post()" controller action method is invoked.
+        [HttpGet]
+        [ActionName("Create")]
+        public ActionResult Create_Get()
         {
             return View();
         }
 
-        //Notice that, the create action method has got parameter names that match with the names of the form controls. 
-        //To see the names of the form controls, right click on the browser and view page source. 
-        //Model binder in mvc maps the values of these control, to the respective parameters.
+        //Instead of passing "Employee" object as a parameter to "Create_Post()" action method, 
+        //we are creating an instance of an "Employee" object with in the function, and updating it using "UpdateModel()" function. 
         [HttpPost]
-        public ActionResult Create(string name, string gender, string city, DateTime dateOfBirth)
+        [ActionName("Create")]
+        public ActionResult Create_Post()
         {
-            EmployeeFromBusinessLayer employee = new EmployeeFromBusinessLayer();
-            employee.Name = name;
-            employee.Gender = gender;
-            employee.City = city;
-            employee.DateOfBirth = dateOfBirth;
+            if (ModelState.IsValid)
+            {
+                EmployeeBusinessLayer employeeBusinessLayer =
+                    new EmployeeBusinessLayer();
 
-            EmployeeBusinessLayer employeeBusinessLayer =
-                new EmployeeBusinessLayer();
+                EmployeeFromBusinessLayer employee = new EmployeeFromBusinessLayer();
+                // "UpdateModel()" function inspects all the HttpRequest inputs such as posted Form data, QueryString, Cookies
+                // and Server variables and populate the employee object.
+                UpdateModel<EmployeeFromBusinessLayer>(employee);
 
-            employeeBusinessLayer.AddEmmployee(employee);
-            return RedirectToAction("Index");
+                employeeBusinessLayer.AddEmmployee(employee);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
     }
