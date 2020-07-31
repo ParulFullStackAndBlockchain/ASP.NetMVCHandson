@@ -34,7 +34,14 @@ namespace BusinessLayer
                         employee.Name = rdr["Name"].ToString();
                         employee.Gender = rdr["Gender"].ToString();
                         employee.City = rdr["City"].ToString();
-                        employee.DateOfBirth = Convert.ToDateTime(rdr["DateOfBirth"]);
+                        //Run the application and navigate to the following URL. http://localhost/MVCDemo/EmployeeUsingBusinessLayer/Create
+                        //Submit the page without entering any data.You will now get a different error stating -Object cannot be cast from DBNull to other types.
+                        //To fix this error, make changes to "Employees" property in "EmployeeBusinessLayer.cs" file as shown below.
+                        //Notice that we are populating "DateOfBirth" property of "Employee" object only if "DateOfBirth" column value is not "DBNull".
+                        if (!(rdr["DateOfBirth"] is DBNull))
+                        {
+                            employee.DateOfBirth = Convert.ToDateTime(rdr["DateOfBirth"]);
+                        }
 
                         employees.Add(employee);
                     }

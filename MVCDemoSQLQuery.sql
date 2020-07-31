@@ -88,3 +88,22 @@ Begin
  Insert into tblEmployee (Name, Gender, City, DateOfBirth)  
  Values (@Name, @Gender, @City, @DateOfBirth)  
 End
+
+-- Run the application and navigate to the following URL.http://localhost/MVCDemo/EmployeeUsingBusinessLayer/Create
+-- Submit the page without entering any data. You will now get a different error stating - Procedure or function 'spAddEmployee' expects 
+-- parameter '@Name', which was not supplied.This is because, the following parameters of stored procedure "spAddEmployee" are all required.
+--@Name
+--@Gender
+--@City
+--@DateOfBirth
+--To make all these parameters optional, modify the stored procedure
+Alter procedure spAddEmployee    
+@Name nvarchar(50) = null,    
+@Gender nvarchar(10) = null,     
+@City nvarchar (50) = null,     
+@DateOfBirth DateTime  = null  
+as    
+Begin    
+ Insert into tblEmployee (Name, Gender, City, DateOfBirth)    
+ Values (@Name, @Gender, @City, @DateOfBirth)    
+End

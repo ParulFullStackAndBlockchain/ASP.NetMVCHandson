@@ -35,21 +35,28 @@ namespace MVCDemo.Controllers
         [ActionName("Create")]
         public ActionResult Create_Post()
         {
+            
+            EmployeeBusinessLayer employeeBusinessLayer =
+                new EmployeeBusinessLayer();
+
+            EmployeeFromBusinessLayer employee = new EmployeeFromBusinessLayer();
+            //Run the application and navigate to the following URL. http://localhost/MVCDemo/EmployeeUsingBusinessLayer/Create
+            //Submit the page without entering any data.We now get an error stating -The model of type 'BusinessLayer.Employee' could not be updated. 
+            //Notice that this error is thrown when UpdateModel() function is invoked.
+            //Now let's use TryUpdateModel() instead of UpdateModel(). 
+            //Run the application and navigate to the following URL http://localhost/MVCDemo/EmployeeUsingBusinessLayer/Create
+            //Submit the page without entering any data.Notice that, we don't get an exception now and the user remains on "Create"
+            //view and the validation errors are displayed to the user.So, the difference is UpdateModel() throws an exception if 
+            //validation fails, where as TryUpdateModel() will never throw an exception.
+            TryUpdateModel<EmployeeFromBusinessLayer>(employee);          
+
             if (ModelState.IsValid)
-            {
-                EmployeeBusinessLayer employeeBusinessLayer =
-                    new EmployeeBusinessLayer();
-
-                EmployeeFromBusinessLayer employee = new EmployeeFromBusinessLayer();
-                // "UpdateModel()" function inspects all the HttpRequest inputs such as posted Form data, QueryString, Cookies
-                // and Server variables and populate the employee object.
-                UpdateModel<EmployeeFromBusinessLayer>(employee);
-
+            {               
                 employeeBusinessLayer.AddEmmployee(employee);
                 return RedirectToAction("Index");
             }
             return View();
         }
-
+        
     }
 }
