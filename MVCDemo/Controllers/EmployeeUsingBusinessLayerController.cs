@@ -25,18 +25,17 @@ namespace MVCDemo.Controllers
             return View();
         }
 
-        // Do we really have to write all the dirty code of retrieving data from FormCollection and assign it to the 
-        // properties of "employee" object. The answer is no. This is the job of the modelbinder in MVC. 
+        //Notice that, the create action method has got parameter names that match with the names of the form controls. 
+        //To see the names of the form controls, right click on the browser and view page source. 
+        //Model binder in mvc maps the values of these control, to the respective parameters.
         [HttpPost]
-        public ActionResult Create(FormCollection formCollection)
+        public ActionResult Create(string name, string gender, string city, DateTime dateOfBirth)
         {
             EmployeeFromBusinessLayer employee = new EmployeeFromBusinessLayer();
-            // Retrieve form data using form collection
-            employee.Name = formCollection["Name"];
-            employee.Gender = formCollection["Gender"];
-            employee.City = formCollection["City"];
-            employee.DateOfBirth =
-                Convert.ToDateTime(formCollection["DateOfBirth"]);
+            employee.Name = name;
+            employee.Gender = gender;
+            employee.City = city;
+            employee.DateOfBirth = dateOfBirth;
 
             EmployeeBusinessLayer employeeBusinessLayer =
                 new EmployeeBusinessLayer();
