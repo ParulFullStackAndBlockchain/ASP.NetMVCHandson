@@ -12,9 +12,7 @@ namespace MVCDemo.Controllers
         // GET: EmployeeUsingBusinessLayer
         public ActionResult Index()
         {
-            EmployeeBusinessLayer employeeBusinessLayer =
-            new EmployeeBusinessLayer();
-
+            EmployeeBusinessLayer employeeBusinessLayer =new EmployeeBusinessLayer();
             List<EmployeeFromBusinessLayer> employees = employeeBusinessLayer.EmployeesFromBusinessLayer.ToList();
             return View(employees);
         }
@@ -27,6 +25,14 @@ namespace MVCDemo.Controllers
         public ActionResult Create_Get()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+            EmployeeFromBusinessLayer employee = employeeBusinessLayer.EmployeesFromBusinessLayer.First(emp => emp.ID == id);
+            return View(employee);
         }
 
         //Instead of passing "Employee" object as a parameter to "Create_Post()" action method, 
