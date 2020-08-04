@@ -63,6 +63,20 @@ namespace MVCDemo.Controllers
             }
             return View();
         }
-        
+
+        [HttpPost]
+        public ActionResult Edit(EmployeeFromBusinessLayer employee)
+        {
+            if (ModelState.IsValid)
+            {
+                EmployeeBusinessLayer employeeBusinessLayer =
+                    new EmployeeBusinessLayer();
+                employeeBusinessLayer.SaveEmmployee(employee);
+
+                return RedirectToAction("Index");
+            }
+            return View(employee);
+        }
+
     }
 }
