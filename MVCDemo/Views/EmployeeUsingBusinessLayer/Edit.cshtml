@@ -21,7 +21,12 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    <!-- Following changes will make "Name" field non-editable.-->
+                    @Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    <!-- At this point we may think, that it is impossible for the user to change the name of the employee using "Edit" view. 
+                        That is not true. Because of the way we have written our code, tools like Fiddler can be used to very easily change 
+                        any properties of the "EmployeeFromBusinessLayer" object.-->
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
