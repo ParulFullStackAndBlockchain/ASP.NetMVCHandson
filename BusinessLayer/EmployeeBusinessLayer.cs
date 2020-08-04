@@ -86,7 +86,7 @@ namespace BusinessLayer
             }
         }
 
-        public void SaveEmmployee(EmployeeFromBusinessLayer employee)
+        public void SaveEmployee(EmployeeFromBusinessLayer employee)
         {
             string connectionString =
                     ConfigurationManager.ConnectionStrings["EmployeeContext"].ConnectionString;
