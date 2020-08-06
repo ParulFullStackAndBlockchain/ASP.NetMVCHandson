@@ -124,3 +124,12 @@ Begin
  DateOfBirth = @DateOfBirth
  Where Id = @Id 
 End
+
+-- Create a stored procedure to delete employee data by "ID"
+Create procedure spDeleteEmployee
+@Id int
+as
+Begin
+ Delete from tblEmployee 
+ where Id = @Id
+End
