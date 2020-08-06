@@ -45,15 +45,7 @@ namespace MVCDemo.Controllers
             EmployeeBusinessLayer employeeBusinessLayer =
                 new EmployeeBusinessLayer();
 
-            EmployeeFromBusinessLayer employee = new EmployeeFromBusinessLayer();
-            //Run the application and navigate to the following URL. http://localhost/MVCDemo/EmployeeUsingBusinessLayer/Create
-            //Submit the page without entering any data.We now get an error stating -The model of type 'BusinessLayer.Employee' could not be updated. 
-            //Notice that this error is thrown when UpdateModel() function is invoked.
-            //Now let's use TryUpdateModel() instead of UpdateModel(). 
-            //Run the application and navigate to the following URL http://localhost/MVCDemo/EmployeeUsingBusinessLayer/Create
-            //Submit the page without entering any data.Notice that, we don't get an exception now and the user remains on "Create"
-            //view and the validation errors are displayed to the user.So, the difference is UpdateModel() throws an exception if 
-            //validation fails, where as TryUpdateModel() will never throw an exception.
+            EmployeeFromBusinessLayer employee = new EmployeeFromBusinessLayer();          
             TryUpdateModel<EmployeeFromBusinessLayer>(employee);          
 
             if (ModelState.IsValid)
@@ -67,13 +59,15 @@ namespace MVCDemo.Controllers
 
         [HttpPost]
         [ActionName("Edit")]
-        //Using "BIND" attribute and specifying the properties that we want to include in model binding. Since, "Name" property
-        //is not specified in the INCLUDE list, it will be excluded from model binding.
-        public ActionResult Edit_Post([Bind(Include = "Id, Gender, City, DateOfBirth")]EmployeeFromBusinessLayer employee)
+        public ActionResult Edit_Post(int id)
         {
             EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
 
-            employee.Name = employeeBusinessLayer.EmployeesFromBusinessLayer.Single(x => x.ID == employee.ID).Name;           
+            EmployeeFromBusinessLayer employee = employeeBusinessLayer.EmployeesFromBusinessLayer.Single(x => x.ID == id);
+            //Note: that we are explicitly calling the model binder, by calling UpdateModel() function passing in our interface
+            //IEmployee. The model binder will update only the properties that are present in the interface.So, if we were to 
+            //generate a post request using fiddler, "Name" property of the "Employee" object will not be updated.
+            UpdateModel<IEmployeeFromBusinessLayer>(employee);
 
             if (ModelState.IsValid)
             {
@@ -82,9 +76,6 @@ namespace MVCDemo.Controllers
             }
 
             return View(employee);
-        }
-       //Note:Alternatively, to exclude properties from binding, we can specify the exclude list using "Bind" attribute as shown below. 
-       //public ActionResult Edit_Post([Bind(Exclude = "Name")] Employee employee)
-
+        }      
     }
 }
