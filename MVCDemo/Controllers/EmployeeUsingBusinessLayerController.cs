@@ -78,19 +78,13 @@ namespace MVCDemo.Controllers
             return View(employee);
         }
 
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
             employeeBusinessLayer.DeleteEmployee(id);
             return RedirectToAction("Index");
-        }
-        //Note: Deleting database records using GET request opens a security hole and is not recommended by Microsoft. Just imagine 
-        //what can happen if there is an image tag in a malicious email as shown below. The moment we open the email, the image 
-        //tries to load and issues a GET request, which would delete the data. 
-        //<img src = "http://localhost/MVCDemo/EmployeeUsingBusinessLayer/Delete/2" />
-        //Also, when search engines index your page, they issue a GET request which would delete the data.In general GET request 
-        //should be free of any side-effects, meaning it should not change the state.
-        //Deletes should always be performed using a POST request. 
+        }      
 
     }
 }
