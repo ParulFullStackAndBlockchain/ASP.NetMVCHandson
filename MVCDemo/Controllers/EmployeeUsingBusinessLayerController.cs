@@ -64,18 +64,16 @@ namespace MVCDemo.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ActionName("Edit")]
-        public ActionResult Edit_Post(int id)
+        //Using "BIND" attribute and specifying the properties that we want to include in model binding. Since, "Name" property
+        //is not specified in the INCLUDE list, it will be excluded from model binding.
+        public ActionResult Edit_Post([Bind(Include = "Id, Gender, City, DateOfBirth")]EmployeeFromBusinessLayer employee)
         {
             EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
 
-            EmployeeFromBusinessLayer employee = employeeBusinessLayer.EmployeesFromBusinessLayer.Single(x => x.ID == id);
-            UpdateModel(employee, new string[] { "ID", "Gender", "City", "DateOfBirth" });//Here the second parameter of UpdateModel method, specifies the list of model properties to update. This is also called as include list or white list. 
-            //Now, if we want to generate a post request using fiddler to change the "Name" field,"Name" property of the "Employee" object will not be updated.
-
-            //Note: Alternatively, to exclude properties from binding, we can specify the exclude list as shown below. 
-            //UpdateModel(employee, null, null, new string[] { "Name" });
+            employee.Name = employeeBusinessLayer.EmployeesFromBusinessLayer.Single(x => x.ID == employee.ID).Name;           
 
             if (ModelState.IsValid)
             {
@@ -85,7 +83,8 @@ namespace MVCDemo.Controllers
 
             return View(employee);
         }
-
+       //Note:Alternatively, to exclude properties from binding, we can specify the exclude list using "Bind" attribute as shown below. 
+       //public ActionResult Edit_Post([Bind(Exclude = "Name")] Employee employee)
 
     }
 }

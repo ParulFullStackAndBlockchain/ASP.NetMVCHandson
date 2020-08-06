@@ -15,7 +15,10 @@ namespace BusinessLayer
     public class EmployeeFromBusinessLayer
     {
         public int ID { get; set; }
-        [Required]
+        //At this point, run the application and navigate to "http://localhost/MVCDemo/EmployeeUsingBusinessLayer/Edit/1". 
+        //Click "Save" button, you will get a "Model" validation error stating - "The Name field is required".
+        //This is because, we marked "Name" property in "Employee" class with "Required" attribute. 
+        //Remove the "Required" attribute from "Name" property.
         public string Name { get; set; }
         public string Gender { get; set; }
         [Required]
