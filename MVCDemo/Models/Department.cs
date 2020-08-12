@@ -11,7 +11,9 @@ namespace MVCDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(DepartmentMetaData))]
     public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,4 +28,11 @@ namespace MVCDemo.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
     }
+
+    public class DepartmentMetaData
+    {
+        [Display(Name = "Department Name")]
+        public string Name { get; set; }
+    }
+
 }
