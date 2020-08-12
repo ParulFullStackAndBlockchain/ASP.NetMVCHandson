@@ -11,7 +11,9 @@ namespace MVCDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(EmployeeMetaData))]
     public partial class Employee
     {
         public int EmployeeId { get; set; }
@@ -21,5 +23,21 @@ namespace MVCDemo.Models
         public Nullable<int> DepartmentId { get; set; }
     
         public virtual Department Department { get; set; }
+    }
+
+    public class EmployeeMetaData
+    {
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string Gender { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
     }
 }
