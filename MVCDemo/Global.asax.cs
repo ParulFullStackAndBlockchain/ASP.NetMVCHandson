@@ -13,11 +13,7 @@ namespace MVCDemo
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
-        {
-            //Existing databases do not need, database initializer so it can be turned off.
-            //Note :Database class is present "in System.Data.Entity" namespace.
-            Database.SetInitializer<MVCDemo.Models.EmployeeContext>(null);
-
+        {           
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             //mapping is defined via RegisterRoutes method defined in RouteConfig class

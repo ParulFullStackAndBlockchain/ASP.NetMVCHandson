@@ -133,3 +133,29 @@ Begin
  Delete from tblEmployee 
  where Id = @Id
 End
+
+delete tblEmployee
+drop table tblEmployee
+
+Create table tblEmployee
+(
+ EmployeeId int Primary Key Identity(1,1),
+ Name nvarchar(50),
+ Gender nvarchar(10),
+ City nvarchar(50),
+ DepartmentId int
+)
+
+Alter table tblEmployee
+add foreign key (DepartmentId)
+references tblDepartment(Id)
+
+Insert into tblEmployee values('Mark','Male','London',1)
+Insert into tblEmployee values('John','Male','Chennai',3)
+Insert into tblEmployee values('Mary','Female','New York',3)
+Insert into tblEmployee values('Mike','Male','Sydeny',2)
+Insert into tblEmployee values('Scott','Male','London',1)
+Insert into tblEmployee values('Pam','Female','Falls Church',2)
+Insert into tblEmployee values('Todd','Male','Sydney',1)
+Insert into tblEmployee values('Ben','Male','New Delhi',2)
+Insert into tblEmployee values('Sara','Female','London',1)
