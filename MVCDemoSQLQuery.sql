@@ -159,3 +159,10 @@ Insert into tblEmployee values('Pam','Female','Falls Church',2)
 Insert into tblEmployee values('Todd','Male','Sydney',1)
 Insert into tblEmployee values('Ben','Male','New Delhi',2)
 Insert into tblEmployee values('Sara','Female','London',1)
+
+select tblDepartment.Name, COUNT(*) as Total
+from tblEmployee
+Join tblDepartment
+on tblDepartment.Id = tblEmployee.DepartmentId
+group by tblDepartment.Name
+order by Total

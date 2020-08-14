@@ -36,6 +36,21 @@ namespace MVCDemo.Controllers
             return View(employee);
         }
 
+        //Suppose the business requirement is such that, we want to display total number of employees by department. 
+        //At the moment, either the Employee or Department class does not have Total property. This is one example, where a 
+        //Data Transfer Object can be used as a model.
+        public ActionResult EmployeesByDepartment()
+        {
+            var departmentTotals = db.Employees.Include("Department")
+                                        .GroupBy(x => x.Department.Name)
+                                        .Select(y => new DepartmentTotals
+                                        {
+                                            Name = y.Key,
+                                            Total = y.Count()
+                                        }).ToList().OrderBy(y => y.Total);
+            return View(departmentTotals);
+        }
+
         // GET: Employee/Create
         public ActionResult Create()
         {
