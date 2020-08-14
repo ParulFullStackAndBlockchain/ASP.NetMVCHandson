@@ -49,13 +49,7 @@ namespace MVCDemo.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmployeeId,Name,Gender,City,DepartmentId")] Employee employee)
-        {
-            //Adding model validation errors dynamically
-            if (string.IsNullOrEmpty(employee.Name))
-            {
-                ModelState.AddModelError("Name", "The Name field is required.");
-            }
-
+        {            
             if (ModelState.IsValid)
             {
                 db.Employees.Add(employee);
@@ -86,14 +80,13 @@ namespace MVCDemo.Controllers
         // POST: Employee/Edit/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        // Using BIND attribute to prevent updating "Name" property using tools like fiddler.
-        public ActionResult Edit([Bind(Exclude = "Name")] Employee employee)
+        // Prevent updating "Name" property using tools like fiddler without using Bind attribute
+        public ActionResult Edit(Employee employee)
         {
             Employee employeeFromDB = db.Employees.Single(x => x.EmployeeId == employee.EmployeeId);
             employeeFromDB.Gender = employee.Gender;
             employeeFromDB.City = employee.City;
             employeeFromDB.DepartmentId = employee.DepartmentId;
-            employee.Name = employeeFromDB.Name;
 
             if (ModelState.IsValid)
             {

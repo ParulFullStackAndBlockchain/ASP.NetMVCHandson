@@ -27,7 +27,7 @@ namespace MVCDemo.Models
 
     public class EmployeeMetaData
     {
-        //[Required]
+        [Required]
         public string Name { get; set; }
 
         [Required]
