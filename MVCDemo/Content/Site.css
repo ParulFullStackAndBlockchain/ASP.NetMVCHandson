@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.redtextbox 
+{
+    background-color:Red; color:White; font-weight:bold;
+}
