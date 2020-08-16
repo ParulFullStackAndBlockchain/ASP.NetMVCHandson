@@ -7,14 +7,5 @@
 <div style="font-family:Arial">
     <h2>Countires List</h2>
 
-    @*Generating a dropdownlist using hard coded values*@
-    @Html.DropDownList("Departments_hc", new List<SelectListItem>
-    {
-        new SelectListItem { Text = "IT", Value = "1", Selected=true},
-        new SelectListItem { Text = "HR", Value = "2"},
-        new SelectListItem { Text = "Payroll", Value = "3"}
-    }, "Select Department")<br/><br />
-
-    @*access Departments list from "ViewBag"*@
     @Html.DropDownList("Departments", "Select Department")
 </div>

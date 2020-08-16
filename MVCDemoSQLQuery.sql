@@ -166,3 +166,15 @@ Join tblDepartment
 on tblDepartment.Id = tblEmployee.DepartmentId
 group by tblDepartment.Name
 order by Total
+
+ALTER TABLE tblDepartment
+ADD IsSelected BIT
+
+--If you want HR department to be selected by default when the dropdownlist is loaded, set "IsSelected=1" for the "HR" department row.
+Update tblDepartment Set IsSelected = 1 Where Id = 2
+
+--If you now want "IT" department to be selected, instead of "HR", set "IsSelected=1" for "IT" department and "IsSelected=0" 
+--for "HR" department.
+Update tblDepartment Set IsSelected = 1 Where Id = 1
+Update tblDepartment Set IsSelected = 0 Where Id = 2
+
