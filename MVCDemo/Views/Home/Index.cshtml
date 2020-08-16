@@ -6,23 +6,15 @@
 
 <div style="font-family:Arial">
     <h2>Countires List</h2>
-    @*What is an HTML helper?
-    An HTML helper is a method that is used to render html content in a view. HTML helpers are implemented as extension methods.*@
-    @Html.TextBox("Name")<br /><br />
-    @Html.TextBox("firstname", "John")<br /><br />
-    @Html.TextBox("firstname1", "John", new
-        {
-            style = "background-color:Red; color:White; font-weight:bold",
-            title = "Please enter your first name"
-        }) <br /><br />
-    @Html.Label("fisrtname", "First Name")
-    @Html.TextBox("firstname2", "John", new { @class = "redtextbox", @readonly = "true" })<br /><br />
-    @Html.Label("Password", "Password")
-    @Html.Password("Password")<br /><br />
-    @Html.Label("Comments", "Comments")
-    @Html.TextArea("Comments", "", 5, 20, new { @class = "redtextbox"})<br /><br />
-    @Html.Label("id", "id")
-    @*Hidden textbox is used to store id values. Id values are not displayed on the page to the end user, but we need them to 
-    update data when the form is posted to the server.*@
-    @Html.Hidden("id")
+
+    @*Generating a dropdownlist using hard coded values*@
+    @Html.DropDownList("Departments_hc", new List<SelectListItem>
+    {
+        new SelectListItem { Text = "IT", Value = "1", Selected=true},
+        new SelectListItem { Text = "HR", Value = "2"},
+        new SelectListItem { Text = "Payroll", Value = "3"}
+    }, "Select Department")<br/><br />
+
+    @*access Departments list from "ViewBag"*@
+    @Html.DropDownList("Departments", "Select Department")
 </div>
