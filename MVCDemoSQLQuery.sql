@@ -178,3 +178,21 @@ Update tblDepartment Set IsSelected = 1 Where Id = 2
 Update tblDepartment Set IsSelected = 1 Where Id = 1
 Update tblDepartment Set IsSelected = 0 Where Id = 2
 
+
+CREATE TABLE tblCity
+(
+ ID INT IDENTITY PRIMARY KEY,
+ Name NVARCHAR(100) NOT NULL,
+ IsSelected BIT NOT NULL
+)
+
+Insert into tblCity values ('London', 0)
+Insert into tblCity values ('New York', 0)
+Insert into tblCity values ('Sydney', 1)
+Insert into tblCity values ('Mumbai', 0)
+Insert into tblCity values ('Cambridge', 0)
+
+select * from tblCity
+
+
+

@@ -1,20 +1,17 @@
-﻿
-@model MVCDemo.Models.Company
+﻿@model IEnumerable<MVCDemo.Models.City>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div style="font-family:Arial">
+    <h2>Index</h2>
 
-@using (Html.BeginForm())
-{
-    foreach (var department in Model.Departments)
+    @using (Html.BeginForm())
     {
-        @Html.RadioButtonFor(m => m.SelectedDepartment, department.Id,
-                                    (department.IsSelected.HasValue && department.IsSelected.Value) ? new { @checked = "checked" } : null
-                                    ) @department.Name
+        @Html.EditorForModel()
+        <br />
+        <input type="submit" value="Submit" />
     }
-    <br />
-    <br />
-    <input type="submit" value="Submit" />
-}
+</div>
+
