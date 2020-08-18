@@ -1,0 +1,16 @@
+﻿@model MVCDemo.Models.Company
+
+@{
+    ViewBag.Title = "Index1";
+}
+
+<h2>Index1</h2>
+ @*Html.TextBoxFor and Html.DropDownListFor are strongly typed and requires a strongly typed view, 
+     and the name is inferred from the lambda expression.*@
+@Html.TextBoxFor(m => m.CompanyName)
+<br />
+@Html.DropDownListFor(m => m.Departments, new SelectList(Model.Departments, "Id", "Name"), "Select Department")
+
+
+
+

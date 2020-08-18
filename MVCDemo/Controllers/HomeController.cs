@@ -9,31 +9,22 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
-        //To have the "IT" department selected, when the departments are loaded from tblDepartment table, use the following
-        //overloaded constructor of "SelectList" class. 
-        //ViewBag.Departments = new SelectList(db.Departments, "Id", "Name", "1");
-        //Notice that we are passing a value of "1" for "selectedValue" parameter. 
-        //Basically we are hard-coding the "selectedValue" in code 
-
-        //Code to drive the selection of an item in the dropdownlist using a column in tblDepartment table.
         public ActionResult Index()
         {
-            EmployeeContext db = new EmployeeContext();
-            List<SelectListItem> selectListItems = new List<SelectListItem>();
+            Company company = new Company("GoDigitalPro");
 
-            foreach (Department department in db.Departments)
-            {
-                SelectListItem selectListItem = new SelectListItem
-                {
-                    Text = department.Name,
-                    Value = department.Id.ToString(),
-                    Selected = department.IsSelected.HasValue ? department.IsSelected.Value : false
-                };
-                selectListItems.Add(selectListItem);
-            }
+            ViewBag.Departments = new SelectList(company.Departments, "Id", "Name");
+            ViewBag.CompanyName = company.CompanyName;
 
-            ViewBag.Departments = selectListItems;
             return View();
+        }
+
+        //Notice that we are passing "Company" object to the View, and hence the view is strongly typed.
+        //Since the view is strongly typed, we can use TextBoxFor and DropDownListFor HTML helpers.
+        public ActionResult Index1()
+        {
+            Company company = new Company("GoDigitalPro");
+            return View(company);
         }
     }
 }
