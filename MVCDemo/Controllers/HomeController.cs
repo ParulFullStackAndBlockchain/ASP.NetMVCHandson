@@ -9,22 +9,43 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
-            Company company = new Company("GoDigitalPro");
-
-            ViewBag.Departments = new SelectList(company.Departments, "Id", "Name");
-            ViewBag.CompanyName = company.CompanyName;
-
-            return View();
-        }
-
-        //Notice that we are passing "Company" object to the View, and hence the view is strongly typed.
-        //Since the view is strongly typed, we can use TextBoxFor and DropDownListFor HTML helpers.
-        public ActionResult Index1()
-        {
-            Company company = new Company("GoDigitalPro");
+            Company company = new Company();
             return View(company);
         }
+
+        [HttpPost]
+        public string Index(Company company)
+        {
+            if (string.IsNullOrEmpty(company.SelectedDepartment))
+            {
+                return "You did not select any department";
+            }
+            else
+            {
+                return "You selected department with ID = " + company.SelectedDepartment;
+            }
+        }//Note : when we press button we post back to the server and post Form Data Contains this "SelectedDepartment:3".
+        //and we have parameter "Company" for our Post Index Action Method. So when "SelectedDepartment" matches with our 
+        //"Company.SelectedDepartment" it will auto bind to this property(becasue names match).
+        //if Post Index Action Method had parameter "String SelectedDepartment" as shown below
+        //it would have worked the same way
+
+        //[HttpPost]
+        //public string Index(string SelectedDepartment)
+        //{
+        //    if (string.IsNullOrEmpty(SelectedDepartment))
+        //    {
+        //        return "You did not select any department";
+        //    }
+        //    else
+        //    {
+        //        return "You selected department with ID = " + SelectedDepartment;
+        //    }
+        //}
+
+
     }
 }

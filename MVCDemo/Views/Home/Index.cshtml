@@ -1,12 +1,20 @@
 ﻿
+@model MVCDemo.Models.Company
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-@*Notice that, here the view is not strongly typed, and we are hard-coding the name 
-    for TextBox and DropDownList HTML helpers.*@
-@Html.TextBox("CompanyName", (string)ViewBag.CompanyName)
-<br />
-@Html.DropDownList("Departments", "Select Department")
 
+@using (Html.BeginForm())
+{
+    foreach (var department in Model.Departments)
+    {
+        @Html.RadioButtonFor(m => m.SelectedDepartment, department.Id,
+                                    (department.IsSelected.HasValue && department.IsSelected.Value) ? new { @checked = "checked" } : null
+                                    ) @department.Name
+    }
+    <br />
+    <br />
+    <input type="submit" value="Submit" />
+}
