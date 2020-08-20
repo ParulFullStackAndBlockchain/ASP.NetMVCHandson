@@ -198,42 +198,32 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CitiesViewModel.cs" />
-    <Compile Include="Models\City.cs">
-      <DependentUpon>EmployeeDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Company.cs" />
-    <Compile Include="Models\Department.cs">
-      <DependentUpon>EmployeeDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DepartmentTotals.cs" />
     <Compile Include="Models\Employee.cs">
-      <DependentUpon>EmployeeDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EmployeeDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EmployeeDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EmployeeDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EmployeeDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EmployeeDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EmployeeDataModel.edmx</DependentUpon>
+      <DependentUpon>SampleDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SampleDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SampleDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SampleDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleDataModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -244,27 +234,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\EmployeeDataModel.Context.tt">
+    <Content Include="Models\SampleDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EmployeeDataModel.edmx</DependentUpon>
-      <LastGenOutput>EmployeeDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>SampleDataModel.edmx</DependentUpon>
+      <LastGenOutput>SampleDataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EmployeeDataModel.tt">
+    <Content Include="Models\SampleDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EmployeeDataModel.edmx</DependentUpon>
-      <LastGenOutput>EmployeeDataModel.cs</LastGenOutput>
+      <DependentUpon>SampleDataModel.edmx</DependentUpon>
+      <LastGenOutput>SampleDataModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\EmployeeDataModel.edmx">
+    <EntityDeploy Include="Models\SampleDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EmployeeDataModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SampleDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EmployeeDataModel.edmx.diagram">
-      <DependentUpon>EmployeeDataModel.edmx</DependentUpon>
+    <Content Include="Models\SampleDataModel.edmx.diagram">
+      <DependentUpon>SampleDataModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -320,7 +310,7 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\EmployeesByDepartment.cshtml" />
     <Content Include="Views\Home\EditorTemplates\City.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,45 +9,84 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet]
+        // GET: Home
         public ActionResult Index()
         {
-            EmployeeContext db = new EmployeeContext();
-            List<SelectListItem> listSelectListItems = new List<SelectListItem>();
-
-            foreach (City city in db.Cities)
-            {
-                SelectListItem selectList = new SelectListItem()
-                {
-                    Text = city.Name,
-                    Value = city.ID.ToString(),
-                    Selected = city.IsSelected
-                };
-                listSelectListItems.Add(selectList);
-            }
-
-            CitiesViewModel citiesViewModel = new CitiesViewModel()
-            {
-                Cities = listSelectListItems
-            };
-
-            return View(citiesViewModel);
+            return View();
         }
 
-        [HttpPost]
-        public string Index(IEnumerable<string> selectedCities)
+        // GET: Home/Details/5
+        public ActionResult Details(int id)
         {
-            if (selectedCities == null)
+            sampleDBContext db = new sampleDBContext();
+            Employee employee = db.Employees.Single(x => x.Id == id);
+            return View(employee);
+        }
+
+        // GET: Home/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Home/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            try
             {
-                return "No cities selected";
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
             }
-            else
+            catch
             {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("You selected - " + string.Join(",", selectedCities));
-                return sb.ToString();
+                return View();
+            }
+        }
+
+        // GET: Home/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: Home/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Home/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Home/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
             }
         }
     }
 }
-//Note: Put the templates in "Shared" folder, if you want the "Templates", to be available for all the views.
