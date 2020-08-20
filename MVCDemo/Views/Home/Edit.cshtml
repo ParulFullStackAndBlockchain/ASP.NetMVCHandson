@@ -1,0 +1,17 @@
+﻿@model MVCDemo.Models.Employee
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div style="font-family:Arial">
+    @using (Html.BeginForm())
+    {
+        @Html.EditorForModel()
+        <br />
+        <br />
+        <input type="submit" value="Save" />
+    }
+</div>

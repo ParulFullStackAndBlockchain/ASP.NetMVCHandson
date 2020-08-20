@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVCDemo.Models;
+using System.Data.Entity;
 
 namespace MVCDemo.Controllers
 {
@@ -48,23 +49,33 @@ namespace MVCDemo.Controllers
         // GET: Home/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            sampleDBContext db = new sampleDBContext();
+            Employee employee = db.Employees.Single(x => x.Id == id);
+            return View(employee);
         }
 
         // POST: Home/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Employee employee)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                sampleDBContext db = new sampleDBContext();
+                Employee employeeFromDB = db.Employees.Single(x => x.Id == employee.Id);
 
-                return RedirectToAction("Index");
+                // Populate all the properties except EmailAddrees
+                employeeFromDB.FullName = employee.FullName;
+                employeeFromDB.Gender = employee.Gender;
+                employeeFromDB.Age = employee.Age;
+                employeeFromDB.HireDate = employee.HireDate;
+                employeeFromDB.Salary = employee.Salary;
+                employeeFromDB.PersonalWebSite = employee.PersonalWebSite;
+
+                db.Entry(employeeFromDB).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = employee.Id });
             }
-            catch
-            {
-                return View();
-            }
+            return View(employee);
         }
 
         // GET: Home/Delete/5

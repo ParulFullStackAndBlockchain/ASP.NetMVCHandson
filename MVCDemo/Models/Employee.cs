@@ -13,6 +13,7 @@ namespace MVCDemo.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel;
+    using System.Web.Mvc;
 
     [MetadataType(typeof(EmployeeMetaData))]
     [DisplayColumn("FullName")]
@@ -30,27 +31,30 @@ namespace MVCDemo.Models
 
     public class EmployeeMetaData
     {
-        // Display mailto hyperlink
+        // Id property is hidden and cannot be changed
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+
+        // EmailAddress is read only
+        [ReadOnly(true)]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
 
-        // Display currency symbol. For country specific currency, set 
-        // culture using globalization element in web.config. 
-        // For Great Britain Pound symbol
-        // <globalization culture="en-gb"/>
+        [ScaffoldColumn(true)]
         [DataType(DataType.Currency)]
         public int? Salary { get; set; }
 
-        // Generate a hyperlink
         [DataType(DataType.Url)]
-        //UIHint attribute is used to specify the name of the template to use to display the data field.
         [UIHint("OpenInNewWindow")]
         public string PersonalWebSite { get; set; }
 
-        // Display only Time Part
-        // [DataType(DataType.Time)]
-        // Display only Date Part
-        [DataType(DataType.Date)]
+        [DisplayAttribute(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime? HireDate { get; set; }
+
+        [DisplayFormat(NullDisplayText = "Gender not specified")]
+        public string Gender { get; set; }
     }
 }
