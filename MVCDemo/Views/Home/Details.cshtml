@@ -10,7 +10,7 @@
     <div>
         <h4>Employee</h4>
         <hr />
-        @*<dl class="dl-horizontal">
+        <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.FullName)
             </dt>
@@ -67,8 +67,7 @@
                 @Html.DisplayFor(model => model.PersonalWebSite)
             </dd>
 
-        </dl>*@
-        @Html.DisplayForModel()
+        </dl>
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
