@@ -1,4 +1,4 @@
-﻿@model MVCDemo.Models.Company
+﻿@model MVCDemo.Models.Employee
 
 @{
     ViewBag.Title = "Details";
@@ -7,9 +7,7 @@
 <div style="font-family:Arial">
     <h2>Details</h2>
 
-    @Html.DisplayTextFor(x => x.CompanyDirector)
-
-    @*<div>
+    <div>
         <h4>Employee</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -74,5 +72,5 @@
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
-    </p>*@
+    </p>
 </div>

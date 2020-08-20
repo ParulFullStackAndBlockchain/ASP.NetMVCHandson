@@ -43,6 +43,8 @@ namespace MVCDemo.Models
 
         // Generate a hyperlink
         [DataType(DataType.Url)]
+        //UIHint attribute is used to specify the name of the template to use to display the data field.
+        [UIHint("OpenInNewWindow")]
         public string PersonalWebSite { get; set; }
 
         // Display only Time Part
