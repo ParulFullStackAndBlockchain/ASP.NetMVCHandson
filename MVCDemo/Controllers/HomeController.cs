@@ -18,9 +18,12 @@ namespace MVCDemo.Controllers
         // GET: Home/Details/5
         public ActionResult Details(int id)
         {
-            sampleDBContext db = new sampleDBContext();
-            Employee employee = db.Employees.Single(x => x.Id == id);
-            return View(employee);
+            //sampleDBContext db = new sampleDBContext();
+            //Employee employee = db.Employees.Single(x => x.Id == id);
+            //return View(employee);
+
+            Company company = new Company();
+            return View(company);
         }
 
         // GET: Home/Create

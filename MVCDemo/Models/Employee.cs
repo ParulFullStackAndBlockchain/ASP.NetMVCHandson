@@ -15,6 +15,7 @@ namespace MVCDemo.Models
     using System.ComponentModel;
 
     [MetadataType(typeof(EmployeeMetaData))]
+    [DisplayColumn("FullName")]
     public partial class Employee
     {
         public int Id { get; set; }
