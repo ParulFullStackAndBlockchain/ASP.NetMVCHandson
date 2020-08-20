@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCDemo.Models.City>
+﻿@model MVCDemo.Models.CitiesViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,10 +6,9 @@
 
 <div style="font-family:Arial">
     <h2>Index</h2>
-
     @using (Html.BeginForm())
     {
-        @Html.EditorForModel()
+        @Html.ListBoxFor(m => m.SelectedCities, Model.Cities, new { size = 4 })
         <br />
         <input type="submit" value="Submit" />
     }

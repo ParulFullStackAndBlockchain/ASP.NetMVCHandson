@@ -14,28 +14,38 @@ namespace MVCDemo.Controllers
         public ActionResult Index()
         {
             EmployeeContext db = new EmployeeContext();
-            return View(db.Cities);
+            List<SelectListItem> listSelectListItems = new List<SelectListItem>();
+
+            foreach (City city in db.Cities)
+            {
+                SelectListItem selectList = new SelectListItem()
+                {
+                    Text = city.Name,
+                    Value = city.ID.ToString(),
+                    Selected = city.IsSelected
+                };
+                listSelectListItems.Add(selectList);
+            }
+
+            CitiesViewModel citiesViewModel = new CitiesViewModel()
+            {
+                Cities = listSelectListItems
+            };
+
+            return View(citiesViewModel);
         }
 
         [HttpPost]
-        public string Index(IEnumerable<City> cities)
+        public string Index(IEnumerable<string> selectedCities)
         {
-            if (cities.Count(x => x.IsSelected) == 0)
+            if (selectedCities == null)
             {
-                return "You have not selected any City";
+                return "No cities selected";
             }
             else
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("You selected - ");
-                foreach (City city in cities)
-                {
-                    if (city.IsSelected)
-                    {
-                        sb.Append(city.Name + ", ");
-                    }
-                }
-                sb.Remove(sb.ToString().LastIndexOf(","), 1);
+                sb.Append("You selected - " + string.Join(",", selectedCities));
                 return sb.ToString();
             }
         }
