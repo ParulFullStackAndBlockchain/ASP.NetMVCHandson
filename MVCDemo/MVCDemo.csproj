@@ -310,8 +310,8 @@
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\EmployeesByDepartment.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\OpenInNewWindow.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
