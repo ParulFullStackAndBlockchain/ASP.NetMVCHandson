@@ -21,12 +21,7 @@ namespace MVCDemo.Controllers
         {
             sampleDBContext db = new sampleDBContext();
             Employee employee = db.Employees.Single(x => x.Id == id);
-            //Using @Html.DisplayFor(model => model) or @Html.DisplayForModel() display templated helper
-            return View(employee);
-
-            //Using @Html.Display("EmployeeData") display templated helper
-            //ViewData["EmployeeData"] = employee;
-            //return View();
+            return View(employee);          
         }
 
         // GET: Home/Create

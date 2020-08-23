@@ -1,14 +1,23 @@
 ﻿@model MVCDemo.Models.Employee
-
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
 
+<script type="text/javascript">
+    $(function () {
+        $("input:text.date").datepicker(
+        {
+            dateFormat: "dd/mm/yy"
+        });
+    });   
+</script>
+
 @using (@Html.BeginForm())
 {
-    //Using @Html.EditorForModel() edit templated helper
     @Html.EditorForModel()
+    <br />
+    <input type="submit" value="Save" />
 }
 

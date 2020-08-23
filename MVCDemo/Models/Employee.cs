@@ -50,8 +50,8 @@ namespace MVCDemo.Models
 
         [DisplayAttribute(Name = "Full Name")]
         public string FullName { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:d}")]
+        
+        [DataType(DataType.DateTime)]
         public DateTime? HireDate { get; set; }
 
         [DisplayFormat(NullDisplayText = "Gender not specified")]
