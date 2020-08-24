@@ -1,4 +1,6 @@
-﻿@model MVCDemo.Models.Employee
+﻿@*@using MVCDemo.CustomHtmlHelpers;*@
+
+@model MVCDemo.Models.Employee
 
 @{
     ViewBag.Title = "Details";
@@ -72,10 +74,14 @@
             </dt>
 
             <dd>
-                @*Url.Content() html helper method resolves a url for a resource when we pass it the relative path.*@
-                <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />
+                @Html.Image(Model.Photo, Model.AlternateText)
             </dd>
 
         </dl>
     </div>
 </div>
+@*Note : To generate a textbox, we use the following code in our view.
+@Html.TextBox("TextBox Name")
+So, here TextBox() is an extension method defined in HtmlHelper class. In the above code, Html is the property of the View, 
+    which returns an instance of the HtmlHelper class.*@
+
