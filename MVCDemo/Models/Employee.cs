@@ -50,8 +50,11 @@ namespace MVCDemo.Models
 
         [DisplayAttribute(Name = "Full Name")]
         public string FullName { get; set; }
-        
-        [DataType(DataType.DateTime)]
+
+        //To make DateTime template generic. We don't want any hard-coded logic, with-in the DateTime editor template.
+        //The DisplayFormat attribute on the HireDate property of the Employee class must be used to determine the display 
+        //format of the date. 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? HireDate { get; set; }
 
         [DisplayFormat(NullDisplayText = "Gender not specified")]
