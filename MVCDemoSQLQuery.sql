@@ -218,5 +218,11 @@ Insert into tblEmployee values
 Insert into tblEmployee values
 ('Mary Jane', NULL, 30, '2009-05-02 19:43:25.965', 'MaryJane@pragimtech.com', 35000, 'https://in.yahoo.com/?p=us')
 
+Alter table tblEmployee Add Photo nvarchar(100), AlternateText nvarchar(100)
+
+Update tblEmployee set Photo='~/Photos/JohnSmith.png', AlternateText = 'John Smith Photo' where Id = 1
+
+
+
 
 
