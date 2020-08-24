@@ -11,12 +11,7 @@ namespace MVCDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel;
-    using System.Web.Mvc;
-
-    [MetadataType(typeof(EmployeeMetaData))]
-    [DisplayColumn("FullName")]
+    
     public partial class Employee
     {
         public int Id { get; set; }
@@ -27,37 +22,7 @@ namespace MVCDemo.Models
         public string EmailAddress { get; set; }
         public Nullable<int> Salary { get; set; }
         public string PersonalWebSite { get; set; }
-    }
-
-    public class EmployeeMetaData
-    {
-        // Id property is hidden and cannot be changed
-        [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
-
-        // EmailAddress is read only
-        [ReadOnly(true)]
-        [DataType(DataType.EmailAddress)]
-        public string EmailAddress { get; set; }
-
-        [ScaffoldColumn(true)]
-        [DataType(DataType.Currency)]
-        public int? Salary { get; set; }
-
-        [DataType(DataType.Url)]
-        [UIHint("OpenInNewWindow")]
-        public string PersonalWebSite { get; set; }
-
-        [DisplayAttribute(Name = "Full Name")]
-        public string FullName { get; set; }
-
-        //To make DateTime template generic. We don't want any hard-coded logic, with-in the DateTime editor template.
-        //The DisplayFormat attribute on the HireDate property of the Employee class must be used to determine the display 
-        //format of the date. 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? HireDate { get; set; }
-
-        [DisplayFormat(NullDisplayText = "Gender not specified")]
-        public string Gender { get; set; }
+        public string Photo { get; set; }
+        public string AlternateText { get; set; }
     }
 }

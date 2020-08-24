@@ -4,84 +4,78 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div style="font-family: Arial">
+    <h2>Details</h2>
 
-<div>
-    <h4>Employee</h4>
-    <hr />
+    <div>
+        <h4>Employee</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FullName)
+            </dt>
 
-    @*@Html.Display("EmployeeData")*@
+            <dd>
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
 
-    @*@Html.DisplayForModel()*@
+            <dt>
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
 
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Age)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Age)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.HireDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HireDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HireDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmailAddress)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.HireDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Salary)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailAddress)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Salary)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.EmailAddress)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PersonalWebSite)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Salary)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PersonalWebSite)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Salary)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Photo)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PersonalWebSite)
-        </dt>
+            <dd>
+                @*Url.Content() html helper method resolves a url for a resource when we pass it the relative path.*@
+                <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PersonalWebSite)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
 </div>
-
-@*There are 3 DISPLAY templated helpers
-@Html.Display("EmployeeData") - Used with a view that is not strongly typed. For example, if you have stored data in ViewData, 
-    then we can use this templated helper using the key that was used to store data in ViewData.
-@Html.DisplayFor(model => model) - Used with strongly typed views. If your model has properties that return complex objects,
-     then this templated helper is very useful.
-@Html.DisplayForModel() - Used with strongly typed views. Walks thru each property, in the model to display the object.
-
-Along the same lines, there are 3 EDIT templated helpers
-@Html.Editor("EmployeeData")
-@Html.EditorFor(model => model)
-@Html.EditorForModel()*@
