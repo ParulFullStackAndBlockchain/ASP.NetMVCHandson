@@ -222,6 +222,8 @@ Alter table tblEmployee Add Photo nvarchar(100), AlternateText nvarchar(100)
 
 Update tblEmployee set Photo='~/Photos/JohnSmith.png', AlternateText = 'John Smith Photo' where Id = 1
 
+Update tblEmployee set Photo='~/Photos/MaryJane.png', AlternateText = 'Mary Jane Photo' where Id = 2
+
 
 
 
