@@ -1,5 +1,4 @@
-﻿@*@using MVCDemo.CustomHtmlHelpers;*@
-
+﻿
 @model MVCDemo.Models.Employee
 
 @{
@@ -74,14 +73,11 @@
             </dt>
 
             <dd>
-                @Html.Image(Model.Photo, Model.AlternateText)
+                @*@Html.Image(Model.Photo, Model.AlternateText)*@
+                @Html.Raw(@Html.Image(Model.Photo, Model.AlternateText))
             </dd>
 
         </dl>
     </div>
 </div>
-@*Note : To generate a textbox, we use the following code in our view.
-@Html.TextBox("TextBox Name")
-So, here TextBox() is an extension method defined in HtmlHelper class. In the above code, Html is the property of the View, 
-    which returns an instance of the HtmlHelper class.*@
 
