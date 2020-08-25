@@ -1,0 +1,6 @@
+﻿@model IEnumerable<MVCDemo.Models.Employee>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_Employee", item)
+}

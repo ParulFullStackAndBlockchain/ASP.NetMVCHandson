@@ -19,7 +19,7 @@ namespace MVCDemo
                 //Default route for MVC applications
                 url: "{controller}/{action}/{id}",
                 //Provides default controller and action values.Also id parameter is otpitonal
-                defaults: new { controller = "Employee", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

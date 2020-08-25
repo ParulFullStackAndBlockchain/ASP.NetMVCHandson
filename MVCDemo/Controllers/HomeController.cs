@@ -13,7 +13,8 @@ namespace MVCDemo.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            sampleDBContext db = new sampleDBContext();
+            return View(db.Employees.ToList());
         }
 
         // GET: Home/Details/5
