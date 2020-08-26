@@ -224,6 +224,15 @@ Update tblEmployee set Photo='~/Photos/JohnSmith.png', AlternateText = 'John Smi
 
 Update tblEmployee set Photo='~/Photos/MaryJane.png', AlternateText = 'Mary Jane Photo' where Id = 2
 
+-- understanding cross site scripting attack
+CREATE TABLE tblComments
+(
+   Id INT IDENTITY PRIMARY KEY,
+   Name NVARCHAR(50),
+   Comments NVARCHAR(500)
+)
+
+
 
 
 

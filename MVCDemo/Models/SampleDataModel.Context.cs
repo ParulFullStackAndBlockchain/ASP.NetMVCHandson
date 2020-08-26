@@ -26,5 +26,6 @@ namespace MVCDemo.Models
         }
     
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
     }
 }

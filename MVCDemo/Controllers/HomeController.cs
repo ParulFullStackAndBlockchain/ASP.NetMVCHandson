@@ -1,28 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCDemo.Models;
-using System.Data.Entity;
 
 namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
+        private sampleDBContext db = new sampleDBContext();
+
         // GET: Home
         public ActionResult Index()
         {
-            sampleDBContext db = new sampleDBContext();
-            return View(db.Employees.ToList());
+            return View(db.Comments.ToList());
         }
 
         // GET: Home/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            sampleDBContext db = new sampleDBContext();
-            Employee employee = db.Employees.Single(x => x.Id == id);
-            return View(employee);          
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comment);
         }
 
         // GET: Home/Create
@@ -32,73 +42,87 @@ namespace MVCDemo.Controllers
         }
 
         // POST: Home/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Home/Edit/5
-        public ActionResult Edit(int id)
-        {
-            sampleDBContext db = new sampleDBContext();
-            Employee employee = db.Employees.Single(x => x.Id == id);
-            return View(employee);
-        }
-
-        // POST: Home/Edit/5
-        [HttpPost]
-        public ActionResult Edit(Employee employee)
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]//To disable input validation (made as security measure to prevent script injection, to avoid XSS attack)
+        public ActionResult Create([Bind(Include = "Id,Name,Comments")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                sampleDBContext db = new sampleDBContext();
-                Employee employeeFromDB = db.Employees.Single(x => x.Id == employee.Id);
-
-                // Populate all the properties except EmailAddrees
-                employeeFromDB.FullName = employee.FullName;
-                employeeFromDB.Gender = employee.Gender;
-                employeeFromDB.Age = employee.Age;
-                employeeFromDB.HireDate = employee.HireDate;
-                employeeFromDB.Salary = employee.Salary;
-                employeeFromDB.PersonalWebSite = employee.PersonalWebSite;
-
-                db.Entry(employeeFromDB).State = EntityState.Modified;
+                db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Details", new { id = employee.Id });
+                return RedirectToAction("Index");
             }
-            return View(employee);
+
+            return View(comment);
+        }
+
+        // GET: Home/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comment);
+        }
+
+        // POST: Home/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Comments")] Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(comment).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(comment);
         }
 
         // GET: Home/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comment);
         }
 
         // POST: Home/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }
