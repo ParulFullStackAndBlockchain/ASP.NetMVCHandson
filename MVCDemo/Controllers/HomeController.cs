@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -46,9 +47,24 @@ namespace MVCDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]//To disable input validation (made as security measure to prevent script injection, to avoid XSS attack)
+        [ValidateInput(false)]// Input validation is disabled, so the users can submit HTML
         public ActionResult Create([Bind(Include = "Id,Name,Comments")] Comment comment)
         {
+            StringBuilder sbComments = new StringBuilder();
+
+            // Encode the text that is coming from comments textbox
+            sbComments.Append(HttpUtility.HtmlEncode(comment.Comments));
+
+            // Only decode bold and underline tags
+            sbComments.Replace("&lt;b&gt;", "<b>");
+            sbComments.Replace("&lt;/b&gt;", "</b>");
+            sbComments.Replace("&lt;u&gt;", "<u>");
+            sbComments.Replace("&lt;/u&gt;", "</u>");
+            comment.Comments = sbComments.ToString();
+
+            // HTML encode the text that is coming from name textbox
+            string strEncodedName = HttpUtility.HtmlEncode(comment.Name);
+            comment.Name = strEncodedName;
             if (ModelState.IsValid)
             {
                 db.Comments.Add(comment);
@@ -57,7 +73,8 @@ namespace MVCDemo.Controllers
             }
 
             return View(comment);
-        }
+        }//Warning: Relying on just filtering the user input, cannot guarantee XSS elimination. XSS can happen in different 
+            //ways and forms.This is just one example. Please read MSDN documentation on XSS and it's counter measures.
 
         // GET: Home/Edit/5
         public ActionResult Edit(int? id)
@@ -126,3 +143,4 @@ namespace MVCDemo.Controllers
         }
     }
 }
+

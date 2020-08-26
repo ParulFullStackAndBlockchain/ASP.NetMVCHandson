@@ -27,8 +27,6 @@
         </td>
         <td>
             @*@Html.DisplayFor(modelItem => item.Comments)*@
-            @*By default asp.net mvc encodes all html. This is another security measure in place, to prevent XSS attack. 
-                To disable html encoding, make the fllowing change on Index.cshtml view.*@
             @Html.Raw(item.Comments)
         </td>
         <td>
@@ -40,19 +38,3 @@
 }
 
 </table>
-@*Note : The following 2 changes that we have done has opened the doors for XSS.
-    1. By allowing HTML to be submitted on Create.cshtml view
-    2. By disabling HTML encoding on Index.cshtml
-
-    To initiate a cross site scripting attack
-    1. Navigate to "Create" view
-    2. Type the following javascript code in "Comments" textbox
-    <script type="text/javascript">
-    alert('Your site is hacked');
-    </script>
-    3. Click "Create"
-
-    Refresh Index view and notice that javascript alert() box is displayed, stating that the site is hacked. 
-    By injecting script, it is also very easy to steal session cookies. These stolen session cookies can then be used to log 
-    into the site and do destructive things.   *@
-
