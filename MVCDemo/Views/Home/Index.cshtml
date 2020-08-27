@@ -42,44 +42,28 @@
     </table>
 </div>
 
-<div>
-    @*Use @ symbol to switch between c# code and html.*@
-    @for (int i = 1; i <= 10; i++)
-    {
-        <b>@i</b>
-    }
-    <br />
-    @*Use @{ } to define a code block. If we want to define some variables and perform calculations, then use code block.*@
+<div> 
+    <br />   
+    @*Transition between c# expressions and literal text*@
     @{
-        int SumOfEvenNumbers = 0;
-        int SumOfOddNumbers = 0;
+        int day = 31;
+        int month = 12;
+        int year = 2013;
+    }
 
-        for (int i = 1; i <= 10; i++)
-        {
-            if (i % 2 == 0)
-            {
-                SumOfEvenNumbers = SumOfEvenNumbers + i;
-            }
-            else
-            {
-                SumOfOddNumbers = SumOfOddNumbers + i;
-            }
-        }
+    Date is @day-@month-@year
+    <br />
+    @*Using explicit code nugget*@
+    @for (int i = 1; i <= 5; i++)
+    {
+        <img src="~/Images/@(i).png" />
     }
     <br />
-    @*Use <text> element or @: to switch between c# code and literal text*@
-    @for (int i = 1; i <= 10; i++)
-        {
-            <b>@i</b>
-            if (i % 2 == 0)
-            {
-            <text> - Even </text>
-            }
-            else
-            {
-            @:  - Odd 
-            }
-        <br />
-        }
-        
+    @*@ symbol is used as code delimiter in razor views. However, razor is smart enough to recognize the format of 
+    internet email address and not to treat the @ symbol as a code delimiter.*@
+    This is my email address<br />
+    <b>abc@gmail.com</b>
+    <br />
+    @*Use @ symbol to escape @*@
+    I will meet you @@ office
 </div>
