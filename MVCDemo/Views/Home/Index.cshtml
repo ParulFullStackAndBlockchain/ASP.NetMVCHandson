@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<MVCDemo.Models.Comment>
 
 @{
+    //Note: we are storing title in ViewBag object.The layout view is going to retrieve it from viewbag and use it as the title.
+    //    The next statement, specifies the layout file to use.
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div style="font-family:Arial">
@@ -40,30 +43,4 @@
         }
 
     </table>
-</div>
-
-<div> 
-    <br />   
-    @*Transition between c# expressions and literal text*@
-    @{
-        int day = 31;
-        int month = 12;
-        int year = 2013;
-    }
-
-    Date is @day-@month-@year
-    <br />
-    @*Using explicit code nugget*@
-    @for (int i = 1; i <= 5; i++)
-    {
-        <img src="~/Images/@(i).png" />
-    }
-    <br />
-    @*@ symbol is used as code delimiter in razor views. However, razor is smart enough to recognize the format of 
-    internet email address and not to treat the @ symbol as a code delimiter.*@
-    This is my email address<br />
-    <b>abc@gmail.com</b>
-    <br />
-    @*Use @ symbol to escape @*@
-    I will meet you @@ office
 </div>
