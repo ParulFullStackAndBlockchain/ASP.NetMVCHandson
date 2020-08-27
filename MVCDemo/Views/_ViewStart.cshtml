@@ -1,3 +1,11 @@
-﻿@*@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Note: we can also write some logic in "_ViewStart.cshtml" to dynamically specify which layout file to use?*@
+@*@{
+    Layout = Request.Browser.IsBrowser("Chrome") ? "~/Views/Shared/_Layout.cshtml" : "~/Views/Shared/_DifferentLayout.cshtml";
 }*@
+
+@*If you want a set of views in a specific folder, to use a different layout file, then you can include 
+another _ViewStart.cshtml file in that specific folder.*@ 

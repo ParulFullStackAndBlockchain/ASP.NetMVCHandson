@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -11,125 +10,112 @@ using MVCDemo.Models;
 
 namespace MVCDemo.Controllers
 {
-    public class HomeController : Controller
+    public class EmployeesController : Controller
     {
         private sampleDBContext db = new sampleDBContext();
 
-        // GET: Home
+        // GET: Employees
         public ActionResult Index()
         {
-            return View(db.Comments.ToList());
+            return View(db.Employees.ToList());
         }
 
-        // GET: Home/Details/5
+        // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+
+            //return View(employee);
+
+            //To prevent this partial view from using the layout file, specified in "_ViewStart.cshtml" 
+            //return "PartialViewResult" in place of "ViewResult".
+            return PartialView("_Employee", employee);
         }
 
-        // GET: Home/Create
+        // GET: Employees/Create
         public ActionResult Create()
         {
-            //Case2 : Layout file can also be specified in a controller action method or in an action filter.
-            return View("Create", "_DifferentLayout");
+            return View();
         }
 
-        // POST: Home/Create
+        // POST: Employees/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]// Input validation is disabled, so the users can submit HTML
-        public ActionResult Create([Bind(Include = "Id,Name,Comments")] Comment comment)
+        public ActionResult Create([Bind(Include = "Id,FullName,Gender,Age,HireDate,EmailAddress,Salary,PersonalWebSite,Photo,AlternateText")] Employee employee)
         {
-            StringBuilder sbComments = new StringBuilder();
-
-            // Encode the text that is coming from comments textbox
-            sbComments.Append(HttpUtility.HtmlEncode(comment.Comments));
-
-            // Only decode bold and underline tags
-            sbComments.Replace("&lt;b&gt;", "<b>");
-            sbComments.Replace("&lt;/b&gt;", "</b>");
-            sbComments.Replace("&lt;u&gt;", "<u>");
-            sbComments.Replace("&lt;/u&gt;", "</u>");
-            comment.Comments = sbComments.ToString();
-
-            // HTML encode the text that is coming from name textbox
-            string strEncodedName = HttpUtility.HtmlEncode(comment.Name);
-            comment.Name = strEncodedName;
             if (ModelState.IsValid)
             {
-                db.Comments.Add(comment);
+                db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(comment);
-        }//Warning: Relying on just filtering the user input, cannot guarantee XSS elimination. XSS can happen in different 
-            //ways and forms.This is just one example. Please read MSDN documentation on XSS and it's counter measures.
+            return View(employee);
+        }
 
-        // GET: Home/Edit/5
+        // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(employee);
         }
 
-        // POST: Home/Edit/5
+        // POST: Employees/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Comments")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id,FullName,Gender,Age,HireDate,EmailAddress,Salary,PersonalWebSite,Photo,AlternateText")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(comment).State = EntityState.Modified;
+                db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(comment);
+            return View(employee);
         }
 
-        // GET: Home/Delete/5
+        // GET: Employees/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(employee);
         }
 
-        // POST: Home/Delete/5
+        // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comments.Find(id);
-            db.Comments.Remove(comment);
+            Employee employee = db.Employees.Find(id);
+            db.Employees.Remove(employee);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -144,4 +130,3 @@ namespace MVCDemo.Controllers
         }
     }
 }
-

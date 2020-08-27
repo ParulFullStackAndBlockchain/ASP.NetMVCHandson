@@ -1,26 +1,77 @@
 ﻿@model MVCDemo.Models.Employee
 
-<table style="font-family:Arial; border:1px solid black; width: 300px">
-    <tr>
-        <td>
-            <img src="@Url.Content(Model.Photo)" alt="@Model.AlternateText" />
-        </td>
-        <td>
-            <table>
-                <tr>
-                    <td><b>Age:</b></td>
-                    <td>@Model.Age</td>
-                </tr>
-                <tr>
-                    <td><b>Gender:</b></td>
-                    <td>@Model.Gender</td>
-                </tr>
-                <tr>
-                    <td><b>Salary:</b></td>
-                    <td>@Model.Salary</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.FullName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.FullName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Gender)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Gender)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Age)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Age)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.HireDate)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.HireDate)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.EmailAddress)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.EmailAddress)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Salary)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Salary)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.PersonalWebSite)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.PersonalWebSite)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Photo)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Photo)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AlternateText)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AlternateText)
+    </dd>
+
+</dl>
 
