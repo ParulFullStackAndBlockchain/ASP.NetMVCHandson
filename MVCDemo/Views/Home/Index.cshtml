@@ -1,4 +1,7 @@
-﻿@model IEnumerable<MVCDemo.Models.Employee>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<MVCDemo.Models.Employee>
 
 @{
     ViewBag.Title = "Index";
@@ -18,13 +21,13 @@
     <table border="1" class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.First().Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gender)
+                @Html.DisplayNameFor(model => model.First().Gender)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.First().Email)
             </th>
             <th>Action</th>
         </tr>
@@ -60,4 +63,13 @@
             }
         }
     </table>
+    @*Below lines of code display the following :
+        1. page numbers for paging
+        2. the pager, only if there are more than 1 page
+        3. current active page and the total number of pages
+        4. number of rows displayed, of the total number of rows available.*@
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["searchBy"],
+    search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded,
+        DisplayItemSliceAndTotal = true})
+
 </div>

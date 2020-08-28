@@ -234,7 +234,8 @@ CREATE TABLE tblComments
 
 -- Implementing search functionality in asp.net mvc
 
-drop table tblEmployee
+drop table tblEmployee1
+
 
 Create table tblEmployee
 (
@@ -249,7 +250,10 @@ Insert into tblEmployee values('James Histo', 'Male', 'James.Histo@test.com')
 Insert into tblEmployee values('Mary Jane', 'Female', 'Mary.Jane@test.com')
 Insert into tblEmployee values('Paul Sensit', 'Male', 'Paul.Sensit@test.com')
 
-
+Insert into tblEmployee values('Saran Nani', 'Female', 'Saran.Nani@test.com')
+Insert into tblEmployee values('Jamesn Histo', 'Male', 'Jamesn.Histo@test.com')
+Insert into tblEmployee values('Maryn Jane', 'Female', 'Maryn.Jane@test.com')
+Insert into tblEmployee values('Pauln Sensit', 'Male', 'Pauln.Sensit@test.com')
 
 
 
