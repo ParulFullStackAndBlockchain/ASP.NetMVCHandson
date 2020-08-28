@@ -39,8 +39,7 @@ namespace MVCDemo.Controllers
         // GET: Home/Create
         public ActionResult Create()
         {
-            //Case2 : Layout file can also be specified in a controller action method or in an action filter.
-            return View("Create", "_DifferentLayout");
+            return View();
         }
 
         // POST: Home/Create

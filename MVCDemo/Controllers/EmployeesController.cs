@@ -33,11 +33,7 @@ namespace MVCDemo.Controllers
                 return HttpNotFound();
             }
 
-            //return View(employee);
-
-            //To prevent this partial view from using the layout file, specified in "_ViewStart.cshtml" 
-            //return "PartialViewResult" in place of "ViewResult".
-            return PartialView("_Employee", employee);
+            return View(employee);           
         }
 
         // GET: Employees/Create

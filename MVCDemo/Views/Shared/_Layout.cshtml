@@ -32,8 +32,23 @@
         </div>
     </div>
     <div class="container body-content">
-        @*View specific content will be plugged-in at the location, where RenderBody() function is called.*@
-        @RenderBody()
+        <table border="1" style="width:800px; font-family:Arial">
+            <tr>
+                <td style="width:200px">
+                    @if(IsSectionDefined("Menu"))
+                    {
+                        @RenderSection("Menu",false)
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Employee List", "Index")
+                    }
+                </td>
+                <td style="width:200px">
+                    @RenderBody()
+                </td>
+            </tr>
+        </table>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
