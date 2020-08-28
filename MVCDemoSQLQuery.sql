@@ -232,6 +232,22 @@ CREATE TABLE tblComments
    Comments NVARCHAR(500)
 )
 
+-- Implementing search functionality in asp.net mvc
+
+drop table tblEmployee
+
+Create table tblEmployee
+(
+ ID int identity primary key,
+ Name nvarchar(50),
+ Gender nvarchar(10),
+ Email nvarchar(50)
+)
+
+Insert into tblEmployee values('Sara Nani', 'Female', 'Sara.Nani@test.com')
+Insert into tblEmployee values('James Histo', 'Male', 'James.Histo@test.com')
+Insert into tblEmployee values('Mary Jane', 'Female', 'Mary.Jane@test.com')
+Insert into tblEmployee values('Paul Sensit', 'Male', 'Paul.Sensit@test.com')
 
 
 

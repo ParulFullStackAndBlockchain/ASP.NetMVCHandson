@@ -3,8 +3,6 @@ using System.Web.Optimization;
 
 namespace MVCDemo
 {
-    //Note: for new MVC create VS 2015 or 2017 the register of jQuery scrpt and ccs are done by class BundleConfig(), 
-    //which is located in /App_Start folder of project.
     public class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
@@ -25,15 +23,9 @@ namespace MVCDemo
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-1.12.1.js"));
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
-
-            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
-                        "~/Content/themes/base/jquery-ui.css"));
         }
     }
 }

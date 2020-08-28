@@ -14,15 +14,9 @@ namespace MVCDemo.Models
     
     public partial class Employee
     {
-        public int Id { get; set; }
-        public string FullName { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
         public string Gender { get; set; }
-        public Nullable<int> Age { get; set; }
-        public Nullable<System.DateTime> HireDate { get; set; }
-        public string EmailAddress { get; set; }
-        public Nullable<int> Salary { get; set; }
-        public string PersonalWebSite { get; set; }
-        public string Photo { get; set; }
-        public string AlternateText { get; set; }
+        public string Email { get; set; }
     }
 }

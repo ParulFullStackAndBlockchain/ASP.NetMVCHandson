@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -13,12 +12,19 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
-        private sampleDBContext db = new sampleDBContext();
+        private SampleDbContext db = new SampleDbContext();
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search)
         {
-            return View(db.Comments.ToList());
+            if (searchBy == "Gender")
+            {
+                return View(db.Employees.Where(x => x.Gender == search || search == null).ToList());
+            }
+            else
+            {
+                return View(db.Employees.Where(x => x.Name.StartsWith(search) || search == null).ToList());
+            }
         }
 
         // GET: Home/Details/5
@@ -28,12 +34,12 @@ namespace MVCDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(employee);
         }
 
         // GET: Home/Create
@@ -47,34 +53,17 @@ namespace MVCDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]// Input validation is disabled, so the users can submit HTML
-        public ActionResult Create([Bind(Include = "Id,Name,Comments")] Comment comment)
+        public ActionResult Create([Bind(Include = "ID,Name,Gender,Email")] Employee employee)
         {
-            StringBuilder sbComments = new StringBuilder();
-
-            // Encode the text that is coming from comments textbox
-            sbComments.Append(HttpUtility.HtmlEncode(comment.Comments));
-
-            // Only decode bold and underline tags
-            sbComments.Replace("&lt;b&gt;", "<b>");
-            sbComments.Replace("&lt;/b&gt;", "</b>");
-            sbComments.Replace("&lt;u&gt;", "<u>");
-            sbComments.Replace("&lt;/u&gt;", "</u>");
-            comment.Comments = sbComments.ToString();
-
-            // HTML encode the text that is coming from name textbox
-            string strEncodedName = HttpUtility.HtmlEncode(comment.Name);
-            comment.Name = strEncodedName;
             if (ModelState.IsValid)
             {
-                db.Comments.Add(comment);
+                db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(comment);
-        }//Warning: Relying on just filtering the user input, cannot guarantee XSS elimination. XSS can happen in different 
-            //ways and forms.This is just one example. Please read MSDN documentation on XSS and it's counter measures.
+            return View(employee);
+        }
 
         // GET: Home/Edit/5
         public ActionResult Edit(int? id)
@@ -83,12 +72,12 @@ namespace MVCDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(employee);
         }
 
         // POST: Home/Edit/5
@@ -96,15 +85,15 @@ namespace MVCDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Comments")] Comment comment)
+        public ActionResult Edit([Bind(Include = "ID,Name,Gender,Email")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(comment).State = EntityState.Modified;
+                db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(comment);
+            return View(employee);
         }
 
         // GET: Home/Delete/5
@@ -114,12 +103,12 @@ namespace MVCDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(employee);
         }
 
         // POST: Home/Delete/5
@@ -127,8 +116,8 @@ namespace MVCDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comments.Find(id);
-            db.Comments.Remove(comment);
+            Employee employee = db.Employees.Find(id);
+            db.Employees.Remove(employee);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -143,4 +132,3 @@ namespace MVCDemo.Controllers
         }
     }
 }
-
