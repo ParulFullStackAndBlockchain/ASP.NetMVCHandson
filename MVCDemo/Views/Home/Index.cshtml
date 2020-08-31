@@ -1,5 +1,44 @@
 ﻿@model IEnumerable<MVCDemo.Models.Employee>
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" language="javascript">
+    $(function () {
+        $("#checkAll").click(function () {
+
+            //When the checkbox in the header is selected, all the checkboxes in the respective rows should be selected.
+            //When the checkbox in the header is deselected, all the checkboxes in the respective rows should be
+            //deselected as well.
+            $("input[name='employeeIdsToDelete']").attr("checked", this.checked);
+
+            $("input[name='employeeIdsToDelete']").click(function () {
+                // If we start to select each checkbox in the datarows, and upon selecting checkboxes in all the datarows,
+                //the checkbox in the header should be selected.
+                if ($("input[name='employeeIdsToDelete']").length == $("input[name='employeeIdsToDelete']:checked").length) {
+                    $("#checkAll").attr("checked", "checked");
+                }
+                //If we deselect any of the checkbox, then the header checkbox should be automatically deselected.
+                else {
+                    $("#checkAll").removeAttr("checked");
+                }
+            });
+
+        });
+        $("#btnSubmit").click(function () {
+            var count = $("input[name='employeeIdsToDelete']:checked").length;
+            if (count == 0) {
+                alert("No rows selected to delete");
+                return false;
+            }
+            else {
+                //We need a client side confirmation, on the number of rows to be deleted. The selected rows should be
+                //deleted from the database table, only when OK button is clicked.If cancel button is clicked, the form
+                //should not be posted to the server, and no rows should be deleted.
+                return confirm(count + " row(s) will be deleted");
+            }
+        });
+    });
+</script>
+
 <div style="font-family:Arial">
     <h2>Employee List</h2>
 
@@ -9,7 +48,7 @@
             <thead>
                 <tr>
                     <th>
-                        Select
+                        <input type="checkbox" id="checkAll" />
                     </th>
                     <th>
                         Name
@@ -28,7 +67,7 @@
                 @Html.EditorForModel()
             </tbody>
         </table>
-        <input type="submit" value="Delete selected employees" />
+        <input type="submit" id="btnSubmit" value="Delete selected employees" />
     }
 </div>
 
