@@ -17,16 +17,39 @@ namespace MVCDemo.Controllers
         private SampleDbContext db = new SampleDbContext();
 
         // GET: Home
-        public ActionResult Index(string searchBy, string search, int? page)
+        public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
+            ViewBag.NameSort = String.IsNullOrEmpty(sortBy) ? "Name desc" : "";
+            ViewBag.GenderSort = sortBy == "Gender" ? "Gender desc" : "Gender";
+
+            var employees = db.Employees.AsQueryable();
+
             if (searchBy == "Gender")
             {
-                return View(db.Employees.Where(x => x.Gender == search || search == null).ToList().ToPagedList(page ?? 1, 3));
+                employees = employees.Where(x => x.Gender == search || search == null);
             }
             else
             {
-                return View(db.Employees.Where(x => x.Name.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 3));
+                employees = employees.Where(x => x.Name.StartsWith(search) || search == null);
             }
+
+            switch (sortBy)
+            {
+                case "Name desc":
+                    employees = employees.OrderByDescending(x => x.Name);
+                    break;
+                case "Gender desc":
+                    employees = employees.OrderByDescending(x => x.Gender);
+                    break;
+                case "Gender":
+                    employees = employees.OrderBy(x => x.Gender);
+                    break;
+                default:
+                    employees = employees.OrderBy(x => x.Name);
+                    break;
+            }
+
+            return View(employees.ToPagedList(page ?? 1, 3));
         }
 
         // GET: Home/Details/5

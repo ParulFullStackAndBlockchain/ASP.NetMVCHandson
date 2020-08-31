@@ -21,10 +21,12 @@
     <table border="1" class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.First().Name)
+                @Html.ActionLink("Name", "Index", new { sortBy = ViewBag.NameSort, searchBy = Request["searchBy"],
+                    search = Request["search"] })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.First().Gender)
+                @Html.ActionLink("Gender", "Index", new { sortBy = ViewBag.GenderSort, searchBy = Request["searchBy"],
+                    search = Request["search"] })
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().Email)
@@ -63,13 +65,9 @@
             }
         }
     </table>
-    @*Below lines of code display the following :
-        1. page numbers for paging
-        2. the pager, only if there are more than 1 page
-        3. current active page and the total number of pages
-        4. number of rows displayed, of the total number of rows available.*@
+
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["searchBy"],
-    search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded,
-        DisplayItemSliceAndTotal = true})
+        search = Request.QueryString["search"], sortBy = Request["sortBy"]}), new PagedListRenderOptions()
+        { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true})
 
 </div>
