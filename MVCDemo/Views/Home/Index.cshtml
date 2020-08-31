@@ -1,73 +1,34 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-
-@model IPagedList<MVCDemo.Models.Employee>
-
-@{
-    ViewBag.Title = "Index";
-}
+﻿@model IEnumerable<MVCDemo.Models.Employee>
 
 <div style="font-family:Arial">
-    <h2>Index</h2>
-    <p>
-        @using (@Html.BeginForm("Index", "Home", FormMethod.Get))
-        {
-            <b>Search By:</b>
-            @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
-            @Html.RadioButton("searchBy", "Gender") <text>Gender</text><br />
-            @Html.TextBox("search") <input type="submit" value="search" />
-        }
-    </p>
-    <table border="1" class="table">
-        <tr>
-            <th>
-                @Html.ActionLink("Name", "Index", new { sortBy = ViewBag.NameSort, searchBy = Request["searchBy"],
-                    search = Request["search"] })
-            </th>
-            <th>
-                @Html.ActionLink("Gender", "Index", new { sortBy = ViewBag.GenderSort, searchBy = Request["searchBy"],
-                    search = Request["search"] })
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Email)
-            </th>
-            <th>Action</th>
-        </tr>
+    <h2>Employee List</h2>
 
-        @if (Model.Count() == 0)
-        {
-            <tr>
-                <td colspan="4">
-                    No records match search criteria
-                </td>
-            </tr>
-        }
-        else
-        {
-            foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-            }
-        }
-    </table>
-
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["searchBy"],
-        search = Request.QueryString["search"], sortBy = Request["sortBy"]}), new PagedListRenderOptions()
-        { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true})
-
+    @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+    {
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>
+                        Select
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Since we have a editor template with the same name as the model of this view (Employee)
+                    below line of code will render the editor template view content in this view -->
+                @Html.EditorForModel()
+            </tbody>
+        </table>
+        <input type="submit" value="Delete selected employees" />
+    }
 </div>
+

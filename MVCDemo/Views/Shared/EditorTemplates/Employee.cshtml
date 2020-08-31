@@ -1,0 +1,19 @@
+﻿@model MVCDemo.Models.Employee
+
+<tr>
+    <td>
+        <!-- Note that the name parameter matches with the 'employeeIdsToDelete' parameter defined in delete post action
+            method i home controller -->
+        <input type="checkbox" name="employeeIdsToDelete" id="employeeIdsToDelete" value="@Model.ID" />
+    </td>
+    <td>
+        @Model.Name
+    </td>
+    <td>
+        @Model.Gender
+    </td>
+    <td>
+        @Model.Email
+    </td>
+</tr>
+
