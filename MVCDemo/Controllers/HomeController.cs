@@ -10,35 +10,33 @@ namespace MVCDemo.Controllers
     public class HomeController : Controller
     {
         private SampleDbContext db = new SampleDbContext();
-
-        //You can control or influence which action method gets invoked using action selectors in mvc. Action selectors
-        //are attributes that can be applied to an action method in a controller.
-
-        //ActionName selector: This action selector is used when you want to invoke an action method with a different name,
-        //than what is already given to the action method. 
-
-        //AcceptVerbs selector: Use this selector, when you want to control, the invocation of an action method based on the 
-        //request type.The default is GET. So, if you don't decorate an action method with any accept verb, then, by default,
-        //the method responds to GET request.
-
-        //Note: HttpGet and HttpPost attributes can be used as shown below. This is an alternative to using AcceptVerbs 
-        //attribute.
-
-        [AcceptVerbs(HttpVerbs.Get)]
-        [ActionName("List")]
+        
         public ActionResult Index()
         {
-            //List should be the view name. In case, you want to use "Index" use below lineof code.
-            return View("Index", db.Employees.ToList());
+            return View(db.Employees.ToList());
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        //[HttpPost]
+        [HttpPost]
         public ActionResult Delete(IEnumerable<int> employeeIdsToDelete)
         {
             db.Employees.Where(x => employeeIdsToDelete.Contains(x.ID)).ToList().ForEach(y => db.Employees.Remove(y));
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //Suppose Method() is for doing some internal work, and we don't want it to be invoked using a URL request.
+        //To achieve this, decorate Method2() with NonAction attribute.
+        //Now, if you naviage to URL /Home/Method, you will get an error - The resource cannot be found.
+        //Another way to restrict access to methods in a controller, is by making them private.
+        [NonAction]
+        public string Method()
+        {
+            return "<h1>Method 2 Invoked</h1>";
+        }
+        //Note: In general, it's a bad design to have a public method in a controller that is not an action method. If you 
+        //have any such method for performing business calculations, it should be somewhere in the model and not in the 
+        //controller.
+        //However, if for some reason, if you want to have public methods in a controller and you don't want to treat them
+        //as actions, then use NonAction attribute.
     }
 }
