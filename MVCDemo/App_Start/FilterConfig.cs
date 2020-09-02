@@ -7,6 +7,7 @@ namespace MVCDemo
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            //the code below adds "HandleErrorAttribute" to GlobalFilterCollection.
             filters.Add(new HandleErrorAttribute());
         }
     }

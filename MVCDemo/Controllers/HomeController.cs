@@ -8,18 +8,13 @@ namespace MVCDemo.Controllers
 {   
     public class HomeController : Controller
     {
-        // Public action method that can be invoked using a URL request
+        //In case you want to handle error in a specific action method and not for all controllers and their action 
+        //methods in the entire application.
+        //Note: This also requires code inside the FilterConfig.RegisterGlobalFilters) method to be commented.
+        //[HandleError]
         public ActionResult Index()
         {
-            return View();
-        }
-
-        // This method is accessible only by a child request. A runtime 
-        // exception will be thrown if a URL request is made to this method
-        [ChildActionOnly]
-        public ActionResult Countries(List<String> countryData)
-        {
-            return View(countryData);
+            throw new Exception("Something went wrong");
         }
     }
 }
