@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCDemo.Models;
+using MVCDemo.Common;
 
 namespace MVCDemo.Controllers
 {
@@ -14,18 +15,17 @@ namespace MVCDemo.Controllers
     {
         private SampleDbContext db = new SampleDbContext();
 
-        //[OutputCache(Duration = 10)]
+        //[OutputCache(CacheProfile = "1MinuteCache")]
         public ActionResult Index()
         {
-            //System.Threading.Thread.Sleep(3000);
             return View(db.Employees.ToList());
         }
 
-        // Child actions can be used to implement partial caching, 
-        // although not necessary. In this case, even if  the ChildActionOnly
-        // attribue is removed, a portion of the view will be cached as expected
         [ChildActionOnly]
-        [OutputCache(Duration = 10)]
+        //Note : OutputCacheAttribute for child actions only supports Duration, VaryByCustom, and VaryByParam values. 
+        //Please do not set CacheProfile, Location, NoStore, SqlDependency, VaryByContentEncoding, or VaryByHeader 
+        //values for child actions.Attribute: [OutputCache(CacheProfile = "1MinuteCache")].     
+        [PartialCache("1MinuteCache")]
         public string GetEmployeeCount()
         {
             return "Employee Count = " + db.Employees.Count().ToString() + "@ " + DateTime.Now.ToString();
