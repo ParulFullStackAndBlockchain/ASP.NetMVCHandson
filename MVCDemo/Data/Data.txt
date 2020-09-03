@@ -1,0 +1,13 @@
+﻿
+Home -> Index -> OnActionExecuting 	- 03-09-2020 12:11:51
+
+Home -> Index -> OnActionExecuted 	- 03-09-2020 12:11:51
+Home -> Index -> OnResultExecuting 	- 03-09-2020 12:11:51
+Home -> Index -> OnResultExecuted 	- 03-09-2020 12:11:51
+---------------------------------------------------------
+
+Home -> welcome -> OnActionExecuting 	- 03-09-2020 12:12:06
+
+Home -> welcome -> OnActionExecuted 	- 03-09-2020 12:12:06
+home -> welcome -> Exception ocuured 	- 03-09-2020 12:12:06
+---------------------------------------------------------

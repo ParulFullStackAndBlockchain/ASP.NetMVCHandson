@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCDemo.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +9,16 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        [TrackExecutionTime]
+        public string Index()
         {
-            return View();
+            return "Index Action Invoked";
         }
 
-        [HttpPost]
-        [ValidateInput(false)]
-        public string Index(string comments)
+        [TrackExecutionTime]
+        public string Welcome()
         {
-            return "Your Comments: " + comments;
+            throw new Exception("Exception ocuured");
         }
     }
 }
