@@ -8,10 +8,16 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
-        [RequireHttps]
-        public string Login()
+        public ActionResult Index()
         {
-            return "This method should be accessed only using HTTPS protocol";
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public string Index(string comments)
+        {
+            return "Your Comments: " + comments;
         }
     }
 }
