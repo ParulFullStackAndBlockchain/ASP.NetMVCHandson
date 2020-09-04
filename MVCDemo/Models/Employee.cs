@@ -21,14 +21,20 @@ namespace MVCDemo.Models
         public string Email { get; set; }
         public Nullable<int> Age { get; set; }
         public string Gender { get; set; }
+        public Nullable<System.DateTime> HireDate { get; set; }
     }
 
     public class EmployeeMetaData
     {
-        //[StringLength] attribute verifies that a string is of certain length, but does not enforce that the property
-        //is REQUIRED. If you want to enforce that the property is required use [Required] attribute.
         [StringLength(10, MinimumLength = 5)]
         [Required]
         public string Name { get; set; }
+
+        [Range(1, 100)]
+        public int Age { get; set; }
+
+        [Range(typeof(DateTime), "01/01/2000", "01/01/2010")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        public DateTime HireDate { get; set; }
     }
 }
