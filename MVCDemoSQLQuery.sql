@@ -255,5 +255,23 @@ Insert into tblEmployee values('Jamesn Histo', 'Male', 'Jamesn.Histo@test.com')
 Insert into tblEmployee values('Maryn Jane', 'Female', 'Maryn.Jane@test.com')
 Insert into tblEmployee values('Pauln Sensit', 'Male', 'Pauln.Sensit@test.com')
 
+-- StringLength attribute in asp.net mvc
+
+drop table tblEmployee
+
+Create table tblEmployee
+(
+ Id int primary key identity(1,1),
+ Name nvarchar(50),
+ Email nvarchar(50),
+ Age int,
+ Gender nvarchar(50)
+)
+
+Insert into tblEmployee values('Sara Nan', 'Sara.Nani@test.com', 30, 'Female')
+Insert into tblEmployee values('James Histo', 'James.Histo@test.com', 33, 'Male' )
+Insert into tblEmployee values('Mary Jane', 'Mary.Jane@test.com', 28, 'Female' )
+Insert into tblEmployee values('Paul Sensit', 'Paul.Sensit@test.com', 29, 'Male' )
+
 
 

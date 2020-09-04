@@ -11,12 +11,24 @@ namespace MVCDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(EmployeeMetaData))]
     public partial class Employee
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Gender { get; set; }
         public string Email { get; set; }
+        public Nullable<int> Age { get; set; }
+        public string Gender { get; set; }
+    }
+
+    public class EmployeeMetaData
+    {
+        //[StringLength] attribute verifies that a string is of certain length, but does not enforce that the property
+        //is REQUIRED. If you want to enforce that the property is required use [Required] attribute.
+        [StringLength(10, MinimumLength = 5)]
+        [Required]
+        public string Name { get; set; }
     }
 }

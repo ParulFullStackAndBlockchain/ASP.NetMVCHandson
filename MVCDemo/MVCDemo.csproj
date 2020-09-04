@@ -205,12 +205,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Employee\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Employee\EmployeeAreaRegistration.cs" />
-    <Compile Include="Areas\Employer\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Employer\EmployerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -271,18 +265,6 @@
     <Content Include="Models\SampleDataModel.edmx.diagram">
       <DependentUpon>SampleDataModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Employee\Views\web.config" />
-    <Content Include="Areas\Employer\Views\web.config" />
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Employee\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Employee\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Employee\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Employer\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Employer\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Employer\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -327,13 +309,14 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Employee\Models\" />
-    <Folder Include="Areas\Employer\Models\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
