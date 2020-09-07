@@ -29,6 +29,7 @@ namespace MVCDemo.Models
     {
         [StringLength(10, MinimumLength = 5)]
         [Required]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "Please enter upper and lower case alphabets only")]
         public string Name { get; set; }
 
         [Range(1, 100)]
@@ -39,5 +40,8 @@ namespace MVCDemo.Models
         //[Range(typeof(DateTime), "01/01/2000", "01/01/2010")]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime HireDate { get; set; }
+
+        [RegularExpression(@"^[\w-\._\+%]+@(?:[\w-]+\.)+[\w]{2,6}$", ErrorMessage = "Please enter a valid email address")]
+        public string Email { get; set; }
     }
 }
