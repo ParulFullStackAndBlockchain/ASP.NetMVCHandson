@@ -9,6 +9,7 @@
 
 namespace MVCDemo.Models
 {
+    using Common;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -33,7 +34,9 @@ namespace MVCDemo.Models
         [Range(1, 100)]
         public int Age { get; set; }
 
-        [Range(typeof(DateTime), "01/01/2000", "01/01/2010")]
+        [CurrentDate]
+        //[DateRange("01/01/2000")]
+        //[Range(typeof(DateTime), "01/01/2000", "01/01/2010")]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime HireDate { get; set; }
     }
