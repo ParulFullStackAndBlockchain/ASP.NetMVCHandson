@@ -273,5 +273,16 @@ Insert into tblEmployee values('James Histo', 'James.Histo@test.com', 33, 'Male'
 Insert into tblEmployee values('Mary Jane', 'Mary.Jane@test.com', 28, 'Female' )
 Insert into tblEmployee values('Paul Sensit', 'Paul.Sensit@test.com', 29, 'Male' )
 
+------ Range attribute in asp.net mvc
+
+Alter table tblEmployee
+Add HireDate Date
+
+Update tblEmployee Set HireDate='2009-08-20' where ID=1
+Update tblEmployee Set HireDate='2008-07-13' where ID=2
+Update tblEmployee Set HireDate='2005-11-11' where ID=3
+Update tblEmployee Set HireDate='2007-10-23' where ID=4
+
+
 
 
