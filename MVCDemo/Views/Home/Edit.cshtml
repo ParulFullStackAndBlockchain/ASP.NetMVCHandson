@@ -5,10 +5,7 @@
     ViewBag.Title = "Edit";
 }
 
-@*To enable client side validation in asp.net mvc Step2: Include a reference to the following javascript files. 
-  Note: 1. In real time, the references to the javascript files are included in the master page or layout page. 
-            This avoids the need to reference them on each and every view where we need validation. 
-        2. The order in which the script files are referenced is also important.*@
+<link href="~/Content/Site.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -22,7 +19,8 @@
     <div class="form-horizontal">
         <h4>Employee</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*To display all errors at one place, use ValidationSummary() HTML helper.*@      
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
@@ -41,14 +39,14 @@
             </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ConfirmEmail)
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfirmEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmEmail, "", new { @class = "text-danger" })
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ConfirmEmail)
-            @Html.ValidationMessageFor(model => model.ConfirmEmail)
-        </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -65,14 +63,13 @@
             </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HireDate)
+        <div class="form-group">
+            @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HireDate)
-            @Html.ValidationMessageFor(model => model.HireDate)
-        </div>
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
