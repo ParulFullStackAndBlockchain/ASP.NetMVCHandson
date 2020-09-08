@@ -1,8 +1,17 @@
 ﻿@model MVCDemo.Models.Employee
 
 @{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Edit";
 }
+
+@*To enable client side validation in asp.net mvc Step2: Include a reference to the following javascript files. 
+  Note: 1. In real time, the references to the javascript files are included in the master page or layout page. 
+            This avoids the need to reference them on each and every view where we need validation. 
+        2. The order in which the script files are referenced is also important.*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 <h2>Edit</h2>
 
