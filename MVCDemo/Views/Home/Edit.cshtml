@@ -1,7 +1,6 @@
 ﻿@model MVCDemo.Models.Employee
 
 @{
-    //Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Edit";
 }
 
@@ -9,6 +8,19 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@*We want to change the backgroundColor of "Save" button on "Edit" view to "Red" on MouseOver and to "Green" on MouseOut.*@
+<script type="text/javascript" language="javascript">
+    function MouseOver(controlId) {
+        var control = document.getElementById(controlId);
+        control.style.backgroundColor = 'red'
+    }
+
+    function MouseOut(controlId) {
+        var control = document.getElementById(controlId);
+        control.style.backgroundColor = 'green'
+    }
+</script>
 
 <h2>Edit</h2>
 
@@ -18,8 +30,7 @@
     
     <div class="form-horizontal">
         <h4>Employee</h4>
-        <hr />
-        @*To display all errors at one place, use ValidationSummary() HTML helper.*@      
+        <hr />   
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -73,7 +84,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input id="btnSubmit" type="submit" value="Save" class="btn btn-default" 
+                       onmouseover="MouseOver('btnSubmit')" onmouseout="MouseOut('btnSubmit')"  />
             </div>
         </div>
     </div>
