@@ -217,6 +217,7 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>SampleDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeMetaData.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SampleDataModel.Context.cs">

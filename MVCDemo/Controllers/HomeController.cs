@@ -70,6 +70,7 @@ namespace MVCDemo.Controllers
             {
                 return HttpNotFound();
             }
+            employee.ConfirmEmail = employee.Email;
             return View(employee);
         }
 
@@ -78,7 +79,7 @@ namespace MVCDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Email,Age,Gender,HireDate")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,Name,Email,Age,Gender,HireDate,ConfirmEmail")] Employee employee)
         {
             if (ModelState.IsValid)
             {
