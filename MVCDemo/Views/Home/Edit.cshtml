@@ -81,3 +81,19 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@*How is Unobtrusive validation implemented in asp.net mvc?
+Using "data" attributes. For example, if we use "Required" attribute, on Name property and if we enable client side validation
+     and unobtrusive JavaScript, then the generated HTML for "Name" field is as shown below.
+<input class="text-box single-line"
+       data-val="true"
+       data-val-required="The Name field is required."
+       id="Name"
+       name="Name"
+       type="text"
+       value="Sara Nan" />
+
+data-val=”true”, indicates that the unobtrusive validation is turned on for this element.
+data-val-required="The Name field is required.", indicates that the "Name" field is required and the associated error message 
+    will be displayed if the validation fails. These data attributes are used by jQuery validation plugin for client side 
+    validation.*@
