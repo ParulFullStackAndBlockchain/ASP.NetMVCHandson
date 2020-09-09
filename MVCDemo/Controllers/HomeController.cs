@@ -51,13 +51,24 @@ namespace MVCDemo.Controllers
             return View();
         }
 
-        // POST: Home/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //Adding model validation error dynamically in the controller action method, to make server side validation work,
+        //when JavaScript is disabled.
+        //Now when you will disable JavaScript in the browser, and test your application. You will not get client side 
+        //validation, but when you submit the form, server side validation still prevents the user from submitting the form, 
+        //if there are validation errors.
+        //However, delegating the responsibility of performing validation, to a controller action method violates separation
+        //of concerns within MVC.Ideally all validation logic should be in the Model.
+        //Using validation attributes in mvc models, should be the preferred method for validation.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FullName,UserName,Password")] User user)
         {
+            // Check if the UserName already exists, and if it does, add Model validation error
+            if (db.Users.Any(x => x.UserName == user.UserName))
+            {
+                ModelState.AddModelError("UserName", "UserName already in use");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
