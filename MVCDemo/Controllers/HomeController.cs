@@ -12,12 +12,22 @@ namespace MVCDemo.Controllers
 {
     public class HomeController : Controller
     {
-        private sampleEntities db = new sampleEntities();
+        private SampleDbContext db = new SampleDbContext();
 
         // GET: Home
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            return View(db.Users.ToList());
+        }
+
+        //Method which gets called to perform the remote validation. An AJAX request is issued to this method. If this method 
+        //returns true, validation succeeds, else validation fails and the form is prevented from being submitted. 
+        //Note: The parameter name (UserName) must match the field name on the view. If they don't match, model binder will 
+        //not be able bind the value with the parameter and validation may not work as expected.
+        public JsonResult IsUserNameAvailable(string UserName)
+        {
+            return Json(!db.Users.Any(x => x.UserName == UserName),
+                                                 JsonRequestBehavior.AllowGet);
         }
 
         // GET: Home/Details/5
@@ -27,12 +37,12 @@ namespace MVCDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(user);
         }
 
         // GET: Home/Create
@@ -46,16 +56,16 @@ namespace MVCDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Email,Age,Gender")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id,FullName,UserName,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Employees.Add(employee);
+                db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(employee);
+            return View(user);
         }
 
         // GET: Home/Edit/5
@@ -65,13 +75,12 @@ namespace MVCDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            employee.ConfirmEmail = employee.Email;
-            return View(employee);
+            return View(user);
         }
 
         // POST: Home/Edit/5
@@ -79,15 +88,15 @@ namespace MVCDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Email,Age,Gender,HireDate,ConfirmEmail")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,FullName,UserName,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(employee);
+            return View(user);
         }
 
         // GET: Home/Delete/5
@@ -97,12 +106,12 @@ namespace MVCDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(user);
         }
 
         // POST: Home/Delete/5
@@ -110,8 +119,8 @@ namespace MVCDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

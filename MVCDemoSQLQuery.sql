@@ -283,6 +283,16 @@ Update tblEmployee Set HireDate='2008-07-13' where ID=2
 Update tblEmployee Set HireDate='2005-11-11' where ID=3
 Update tblEmployee Set HireDate='2007-10-23' where ID=4
 
+-------  Remote validation in asp.net mvc
+
+Create table tblUsers
+(
+ [Id] int primary key identity,
+ [FullName] nvarchar(50),
+ [UserName] nvarchar(50),
+ [Password] nvarchar(50) 
+)
+
 
 
 
