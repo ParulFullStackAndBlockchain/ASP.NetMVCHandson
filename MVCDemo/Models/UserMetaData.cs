@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCDemo.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,9 +15,8 @@ namespace MVCDemo.Models
 
     public class UserMetaData
     {
-        //Notice that the name of the method (IsUserNameAvailable) and the controller name (Home) and error message are 
-        //passed as arguments to Remote Attribute
-        [Remote("IsUserNameAvailable", "Home", ErrorMessage = "UserName already in use.")]
+        [RemoteClientServer("IsUserNameAvailable", "Home", ErrorMessage = "UserName already in use ...")]
+        //[Remote("IsUserNameAvailable", "Home", ErrorMessage = "UserName already in use.")]
         public string UserName { get; set; }
     }
 }
