@@ -5,13 +5,27 @@
 
     <h2>Students</h2>
 
+    <script type="text/javascript" language="javascript">
+
+        function ClearResults() {
+            $("#divStudents").empty();
+        }
+
+        function CountRows() {
+            alert(($("#tableStudents tr").length - 1) + 'rows retrieved');
+        }
+
+    </script>
+
     @Ajax.ActionLink("All", "All",
     new AjaxOptions
     {
         HttpMethod = "GET", // HttpMethod to use, GET or POST
         UpdateTargetId = "divStudents", // ID of the HTML element to update
         InsertionMode = InsertionMode.Replace, // Replace the existing contents
-        LoadingElementId = "divloading"
+        LoadingElementId = "divloading",
+        OnBegin = "ClearResults",
+        OnSuccess = "CountRows"
     })
 
     <span style="color:Blue">|</span>
@@ -22,7 +36,9 @@
         HttpMethod = "GET", // HttpMethod to use, GET or POST
         UpdateTargetId = "divStudents", // ID of the HTML element to update
         InsertionMode = InsertionMode.Replace, // Replace the existing contents
-        LoadingElementId = "divloading"
+        LoadingElementId = "divloading",
+        OnBegin = "ClearResults",
+        OnSuccess = "CountRows"
     })
 
     <span style="color:Blue">|</span>
@@ -33,7 +49,9 @@
         HttpMethod = "GET", // HttpMethod to use, GET or POST
         UpdateTargetId = "divStudents", // ID of the HTML element to update
         InsertionMode = InsertionMode.Replace, // Replace the existing contents
-        LoadingElementId = "divloading"
+        LoadingElementId = "divloading",
+        OnBegin = "ClearResults",
+        OnSuccess = "CountRows"
     })
 
     <br /><br />
