@@ -10,7 +10,8 @@
     {
         HttpMethod = "GET", // HttpMethod to use, GET or POST
         UpdateTargetId = "divStudents", // ID of the HTML element to update
-        InsertionMode = InsertionMode.Replace // Replace the existing contents
+        InsertionMode = InsertionMode.Replace, // Replace the existing contents
+        LoadingElementId = "divloading"
     })
 
     <span style="color:Blue">|</span>
@@ -20,7 +21,8 @@
     {
         HttpMethod = "GET", // HttpMethod to use, GET or POST
         UpdateTargetId = "divStudents", // ID of the HTML element to update
-        InsertionMode = InsertionMode.Replace // Replace the existing contents
+        InsertionMode = InsertionMode.Replace, // Replace the existing contents
+        LoadingElementId = "divloading"
     })
 
     <span style="color:Blue">|</span>
@@ -30,10 +32,14 @@
     {
         HttpMethod = "GET", // HttpMethod to use, GET or POST
         UpdateTargetId = "divStudents", // ID of the HTML element to update
-        InsertionMode = InsertionMode.Replace // Replace the existing contents
+        InsertionMode = InsertionMode.Replace, // Replace the existing contents
+        LoadingElementId = "divloading"
     })
 
     <br /><br />
+    <div id="divloading" style="display:none;">
+        <img src="~/Images/spinner.gif" />
+    </div>
     <div id="divStudents">
     </div>
 </div>
