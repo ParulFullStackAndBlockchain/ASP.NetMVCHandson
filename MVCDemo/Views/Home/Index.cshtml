@@ -1,45 +1,39 @@
-﻿@model IEnumerable<MVCDemo.Models.User>
+﻿<div style="font-family:Arial">
 
-@{
-    ViewBag.Title = "Index";
-}
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
-<h2>Index</h2>
+    <h2>Students</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th></th>
-    </tr>
+    @Ajax.ActionLink("All", "All",
+    new AjaxOptions
+    {
+        HttpMethod = "GET", // HttpMethod to use, GET or POST
+        UpdateTargetId = "divStudents", // ID of the HTML element to update
+        InsertionMode = InsertionMode.Replace // Replace the existing contents
+    })
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    <span style="color:Blue">|</span>
 
-</table>
+    @Ajax.ActionLink("Top 3", "Top3",
+    new AjaxOptions
+    {
+        HttpMethod = "GET", // HttpMethod to use, GET or POST
+        UpdateTargetId = "divStudents", // ID of the HTML element to update
+        InsertionMode = InsertionMode.Replace // Replace the existing contents
+    })
+
+    <span style="color:Blue">|</span>
+
+    @Ajax.ActionLink("Bottom 3", "Bottom3",
+    new AjaxOptions
+    {
+        HttpMethod = "GET", // HttpMethod to use, GET or POST
+        UpdateTargetId = "divStudents", // ID of the HTML element to update
+        InsertionMode = InsertionMode.Replace // Replace the existing contents
+    })
+
+    <br /><br />
+    <div id="divStudents">
+    </div>
+</div>

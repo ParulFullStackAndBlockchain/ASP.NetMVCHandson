@@ -293,6 +293,26 @@ Create table tblUsers
  [Password] nvarchar(50) 
 )
 
+---------- Ajax with asp.net mvc
+
+Create table tblStudents
+(
+ Id int identity primary key,
+ Name nvarchar(50),
+ TotalMarks int
+)
+
+Insert into tblStudents values ('Mark', 900)
+Insert into tblStudents values ('Pam', 760)
+Insert into tblStudents values ('John', 980)
+Insert into tblStudents values ('Ram', 990)
+Insert into tblStudents values ('Ron', 440)
+Insert into tblStudents values ('Able', 320)
+Insert into tblStudents values ('Steve', 983)
+Insert into tblStudents values ('James', 720)
+Insert into tblStudents values ('Mary', 870)
+Insert into tblStudents values ('Nick', 680)
+
 
 
 

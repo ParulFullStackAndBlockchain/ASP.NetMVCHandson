@@ -25,6 +25,6 @@ namespace MVCDemo.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
     }
 }
