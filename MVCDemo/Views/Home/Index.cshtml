@@ -5,7 +5,15 @@
 }
 
 <link href="~/Content/themes/base/minified/jquery.ui.autocomplete.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+@*Using CDN for jquery-1.10.2.js*@
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+@*fall back from CDN to use local copy of Jquery*@
+<script type="text/javascript">
+    window.jQuery || document.write('<script src="/MVCDemo/Scripts/jquery-1.10.2.js">\x3C/script>')
+</script>
+
 <script src="~/Scripts/jquery-ui-1.10.3.min.js"></script>
 
 <script type="text/javascript">
