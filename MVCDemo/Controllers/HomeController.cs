@@ -1,9 +1,9 @@
-﻿using MVCDemo.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCDemo.Models;
 
 namespace MVCDemo.Controllers
 {
@@ -11,34 +11,32 @@ namespace MVCDemo.Controllers
     {
         SampleDbContext db = new SampleDbContext();
 
-        // GET: Home
         public ActionResult Index()
-        {
-            return View();
+        {            
+            return View(db.Students);
         }
 
-        // Return all students
-        public PartialViewResult All()
+        [HttpPost]
+        public ActionResult Index(string searchTerm)
         {
-            System.Threading.Thread.Sleep(1000);
-            List<Student> model = db.Students.ToList();
-            return PartialView("_Student", model);
+            List<Student> students;
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                students = db.Students.ToList();
+            }
+            else
+            {
+                students = db.Students
+                    .Where(s => s.Name.StartsWith(searchTerm)).ToList();
+            }
+            return View(students);
         }
 
-        // Return Top3 students
-        public PartialViewResult Top3()
+        public JsonResult GetStudents(string term)
         {
-            System.Threading.Thread.Sleep(1000);
-            List<Student> model = db.Students.OrderByDescending(x => x.TotalMarks).Take(3).ToList();
-            return PartialView("_Student", model);
-        }
-
-        // Return Bottom3 students
-        public PartialViewResult Bottom3()
-        {
-            System.Threading.Thread.Sleep(1000);
-            List<Student> model = db.Students.OrderBy(x => x.TotalMarks).Take(3).ToList();
-            return PartialView("_Student", model);
+            List<string> students = db.Students.Where(s => s.Name.StartsWith(term))
+                .Select(x => x.Name).ToList();
+            return Json(students, JsonRequestBehavior.AllowGet);
         }
     }
 }
